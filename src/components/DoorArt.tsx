@@ -17,7 +17,7 @@ function Wash({ cx, cy, rx, ry, color, id, opacity = 0.55 }: { cx: number; cy: n
   return <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill={color} opacity={opacity} filter={`url(#${id}-blur)`} />;
 }
 
-function Leaf({ x, y, r = 0, s = 1 }: { x: number; y: number; r?: number; s?: number }) {
+export function Leaf({ x, y, r = 0, s = 1 }: { x: number; y: number; r?: number; s?: number }) {
   return (
     <g transform={`translate(${x} ${y}) rotate(${r}) scale(${s})`}>
       <path d="M0 0 C3 -4 9 -4 12 0 C9 4 3 4 0 0 Z" fill={leafC} stroke={leafDark} strokeWidth=".4" />
@@ -26,7 +26,7 @@ function Leaf({ x, y, r = 0, s = 1 }: { x: number; y: number; r?: number; s?: nu
   );
 }
 
-function Rose({ x, y, r = 4, tone = 'pink' }: { x: number; y: number; r?: number; tone?: 'pink' | 'red' | 'blush' }) {
+export function Rose({ x, y, r = 4, tone = 'pink' }: { x: number; y: number; r?: number; tone?: 'pink' | 'red' | 'blush' }) {
   const c = { pink: ['#f2a7bb', '#e07a98', '#b9476a'], red: ['#e0606e', '#c23a4d', '#8e1f33'], blush: ['#f8cfd6', '#eeabb9', '#c97a8f'] }[tone];
   return (
     <g transform={`translate(${x} ${y})`}>
@@ -43,7 +43,7 @@ function Rose({ x, y, r = 4, tone = 'pink' }: { x: number; y: number; r?: number
   );
 }
 
-function Marigold({ x, y, r = 3 }: { x: number; y: number; r?: number }) {
+export function Marigold({ x, y, r = 3 }: { x: number; y: number; r?: number }) {
   return (
     <g transform={`translate(${x} ${y})`}>
       <circle r={r} fill="#f4a32c" />

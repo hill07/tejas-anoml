@@ -167,3 +167,103 @@
     transform: none;
   }
 }
+
+/* ---------- Invitation cards (Wedding Invite page) ---------- */
+.inv-kenburns {
+  transform-origin: 50% 85%;
+  animation: inv-zoom 14s ease-in-out infinite alternate;
+}
+.inv-sway {
+  animation: inv-sway 4.5s ease-in-out infinite alternate;
+}
+.inv-twinkle {
+  animation: inv-twinkle 2.2s ease-in-out infinite;
+}
+.inv-flicker {
+  animation: inv-flicker 0.8s ease-in-out infinite alternate;
+}
+.inv-glow {
+  animation: inv-twinkle 3.5s ease-in-out infinite;
+}
+.inv-petal {
+  border-radius: 60% 0 60% 0;
+  opacity: 0;
+  animation: inv-fall linear infinite;
+}
+.inv-spark {
+  box-shadow: 0 0 6px 2px rgba(255, 244, 210, 0.8);
+  animation: inv-twinkle 2.4s ease-in-out infinite;
+}
+.inv-in {
+  animation: inv-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+/* Only the card in focus moves — the rest rest quietly. */
+.inv-card[data-active='false'] *,
+.inv-card[data-active='false'] {
+  animation-play-state: paused !important;
+}
+
+@keyframes inv-zoom {
+  to {
+    transform: scale(1.06);
+  }
+}
+@keyframes inv-sway {
+  from {
+    transform: rotate(-2deg);
+  }
+  to {
+    transform: rotate(2deg);
+  }
+}
+@keyframes inv-twinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes inv-flicker {
+  from {
+    transform: scale(0.94, 0.9);
+  }
+  to {
+    transform: scale(1.04, 1.08);
+  }
+}
+@keyframes inv-fall {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(0deg);
+  }
+  10% {
+    opacity: 0.9;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift, 30px), 900px) rotate(540deg);
+  }
+}
+@keyframes inv-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .inv-petal,
+  .inv-spark {
+    display: none;
+  }
+}

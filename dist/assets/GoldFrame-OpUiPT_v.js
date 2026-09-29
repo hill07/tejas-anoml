@@ -1,4 +1,4 @@
-import{j as s}from"./index-C5onuQ-L.js";const a={background:`
+import{j as s}from"./index-XDaECL6H.js";const a={background:`
     linear-gradient(135deg, hsl(45 85% 78%) 0%, hsl(40 70% 52%) 18%, hsl(34 70% 34%) 34%, hsl(44 85% 70%) 50%,
       hsl(36 72% 40%) 66%, hsl(45 88% 76%) 82%, hsl(32 70% 32%) 100%)`,boxShadow:`
     inset 0 0 0 1px hsl(45 90% 82% / .8),
