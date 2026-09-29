@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Palette taken from the design reference */
+    --background: 36 38% 92%;
+    --ivory: 38 45% 90%;
+    --ivory-deep: 36 30% 82%;
+    --gold: 38 55% 48%;
+    --gold-light: 42 65% 65%;
+    --gold-deep: 32 60% 38%;
+    --maroon: 345 60% 22%;
+    --maroon-deep: 348 70% 16%;
+    --rose: 348 45% 45%;
+    --ink: 345 45% 18%;
+    --muted: 345 20% 35%;
+    --gradient-gold: linear-gradient(135deg, hsl(42 70% 70%), hsl(38 60% 45%), hsl(32 65% 35%));
+    --nav-h: 76px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-[hsl(var(--background))] font-serif text-ink antialiased;
+    font-size: 18px;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: hsl(var(--gold-light) / 0.45);
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--gold));
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Small spaced capitals used for labels */
+  .eyebrow {
+    @apply font-heading text-[11px] font-medium uppercase tracking-[0.28em] text-gold-deep;
+  }
+
+  .text-gold-gradient {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Soft taupe velvet — the hero of the design reference */
+  .bg-velvet-taupe {
+    background:
+      repeating-linear-gradient(90deg, hsl(30 20% 40% / 0.035) 0 1px, transparent 1px 4px),
+      radial-gradient(ellipse 80% 60% at 50% 42%, hsl(36 40% 88%) 0%, hsl(32 26% 76%) 55%, hsl(28 20% 62%) 100%);
+  }
+
+  /* Deep crimson velvet — wardrobe planner */
+  .bg-velvet-crimson {
+    background:
+      repeating-linear-gradient(90deg, hsl(0 0% 100% / 0.025) 0 1px, transparent 1px 5px),
+      radial-gradient(ellipse 70% 40% at 50% 12%, hsl(340 62% 42%) 0%, transparent 70%),
+      radial-gradient(ellipse at 50% 50%, hsl(342 72% 34%) 0%, hsl(345 75% 22%) 100%);
+  }
+
+  /* Dusky mauve — RSVP */
+  .bg-velvet-mauve {
+    background:
+      repeating-linear-gradient(90deg, hsl(0 0% 100% / 0.03) 0 1px, transparent 1px 5px),
+      radial-gradient(ellipse at 50% 20%, hsl(330 14% 62%) 0%, hsl(340 16% 44%) 60%, hsl(345 22% 30%) 100%);
+  }
+
+  /* Watercolour sky — navigation & travel */
+  .bg-sky {
+    background: linear-gradient(180deg, hsl(224 55% 84%) 0%, hsl(270 30% 90%) 28%, hsl(30 70% 93%) 62%, hsl(28 80% 86%) 100%);
+  }
+
+  /* Ivory paper with a faint dot motif */
+  .bg-paper {
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(hsl(var(--gold) / 0.16) 1px, transparent 1.2px);
+    background-size: 22px 22px;
+  }
+
+  /* Elevated ivory card with a thin gold ring */
+  .card {
+    @apply relative rounded-2xl p-5 sm:p-6;
+    background: linear-gradient(180deg, hsl(40 60% 97%) 0%, hsl(38 45% 92%) 100%);
+    box-shadow:
+      0 0 0 1px hsl(var(--gold) / 0.35),
+      0 14px 34px -18px hsl(345 40% 18% / 0.35);
+  }
+
+  .card-link {
+    @apply card block transition duration-300 hover:-translate-y-0.5;
+  }
+  .card-link:hover {
+    box-shadow:
+      0 0 0 1px hsl(var(--gold) / 0.65),
+      0 20px 40px -18px hsl(345 40% 18% / 0.45);
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full bg-[hsl(var(--ivory-deep)/0.7)] px-2.5 py-1 font-serif text-[13px] font-medium text-muted;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 font-heading text-[12px] font-medium uppercase tracking-[0.2em] transition duration-300 active:scale-[0.98];
+  }
+  .btn-primary {
+    @apply btn bg-maroon-deep text-ivory hover:bg-maroon;
+    box-shadow:
+      0 0 0 1px hsl(var(--gold-light) / 0.6),
+      0 10px 24px -12px hsl(345 60% 10% / 0.7);
+  }
+  .btn-ghost {
+    @apply btn bg-[hsl(var(--ivory)/0.7)] text-maroon-deep hover:bg-ivory;
+    box-shadow: 0 0 0 1px hsl(var(--gold) / 0.5);
+  }
+
+  .field-label {
+    @apply font-heading text-[11px] font-medium uppercase tracking-[0.22em] text-maroon-deep;
+  }
+  .field {
+    @apply mt-1.5 w-full border-0 border-b-2 border-gold-light bg-transparent px-1 py-2 font-serif text-lg text-ink outline-none transition-colors placeholder:italic placeholder:text-[hsl(var(--muted)/0.55)] focus:border-gold-deep;
+  }
+
+  .link-gold {
+    @apply font-heading text-[11px] font-medium uppercase tracking-[0.18em] text-gold-deep underline-offset-4 hover:underline;
+  }
+}
+
+/* Reveal-on-scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
