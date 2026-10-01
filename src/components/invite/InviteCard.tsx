@@ -65,8 +65,8 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
         style={{
           background:
             event.slug === 'welcome-party' || event.slug === 'reception'
-              ? 'linear-gradient(180deg, rgba(35,12,25,.38) 0%, rgba(35,12,25,.12) 48%, rgba(35,12,25,.3) 100%)'
-              : 'linear-gradient(180deg, rgba(255,248,232,.55) 0%, rgba(255,248,232,.12) 48%, rgba(35,12,25,.18) 100%)',
+              ? 'linear-gradient(180deg, rgba(20,10,25,.72) 0%, rgba(20,10,25,.48) 24%, rgba(20,10,25,.08) 46%, transparent 60%, rgba(20,10,25,.12) 100%)'
+              : 'linear-gradient(180deg, rgba(255,250,239,.9) 0%, rgba(255,250,239,.72) 24%, rgba(255,250,239,.22) 43%, transparent 58%, rgba(35,12,25,.08) 100%)',
         }}
         aria-hidden="true"
       />
@@ -108,22 +108,22 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
       ))}
 
       {/* lettering */}
-      <div key={String(active)} className="absolute inset-x-0 top-0 pl-[18%] pr-[7%] pt-[10%] text-right">
+      <div key={String(active)} className="absolute inset-x-0 top-0 z-10 pl-[9%] pr-[7%] pt-[7%] text-right">
         <h2
           className={`font-script leading-[1.05] ${active ? 'inv-in' : ''}`}
-          style={{ color: theme.title, fontSize: 'clamp(1.6rem, 13cqw, 3.6rem)', textShadow: '0 1px 1px rgba(0,0,0,.08)' }}
+          style={{ color: theme.title, fontSize: 'clamp(1.35rem, 10.5cqw, 2.8rem)', textShadow: event.slug === 'welcome-party' || event.slug === 'reception' ? '0 2px 8px rgba(0,0,0,.55)' : '0 1px 3px rgba(255,255,255,.85)' }}
         >
           {event.name}
         </h2>
         <p
           className={`mt-[3cqw] font-serif font-semibold leading-snug ${active ? 'inv-in' : ''}`}
-          style={{ color: theme.text, fontSize: 'clamp(.8rem, 4.6cqw, 1.25rem)', animationDelay: '.25s' }}
+          style={{ color: theme.text, fontSize: 'clamp(.72rem, 3.8cqw, 1.05rem)', textShadow: event.slug === 'welcome-party' || event.slug === 'reception' ? '0 1px 4px rgba(0,0,0,.55)' : '0 1px 2px rgba(255,255,255,.9)', animationDelay: '.25s' }}
         >
           {event.dateLabel} <span className="opacity-70">|</span> {formatTime(event.startTime)}
         </p>
         <p
           className={`mt-[2.5cqw] font-serif font-semibold leading-snug ${active ? 'inv-in' : ''}`}
-          style={{ color: theme.text, fontSize: 'clamp(.8rem, 4.6cqw, 1.25rem)', animationDelay: '.45s' }}
+          style={{ color: theme.text, fontSize: 'clamp(.72rem, 3.8cqw, 1.05rem)', textShadow: event.slug === 'welcome-party' || event.slug === 'reception' ? '0 1px 4px rgba(0,0,0,.55)' : '0 1px 2px rgba(255,255,255,.9)', animationDelay: '.45s' }}
         >
           Venue:
           <br />
@@ -131,7 +131,7 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
         </p>
         <p
           className={`mt-[2cqw] font-serif italic ${active ? 'inv-in' : ''}`}
-          style={{ color: theme.text, fontSize: 'clamp(.75rem, 4cqw, 1.1rem)', opacity: 0.85, animationDelay: '.65s' }}
+          style={{ color: theme.text, fontSize: 'clamp(.68rem, 3.3cqw, .95rem)', opacity: 0.95, textShadow: event.slug === 'welcome-party' || event.slug === 'reception' ? '0 1px 4px rgba(0,0,0,.55)' : '0 1px 2px rgba(255,255,255,.9)', animationDelay: '.65s' }}
         >
           {event.dressCode}
         </p>
