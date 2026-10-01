@@ -67,6 +67,19 @@ function Hero() {
         Anmol &amp; Tejas
       </h1>
 
+      <div className="mt-2 animate-rise px-2 text-center [animation-delay:.45s]">
+        <p className="font-serif text-xs italic leading-relaxed text-maroon-deep sm:text-sm">
+          With loving memory of
+        </p>
+        <p className="mt-1 font-serif text-xs leading-relaxed text-maroon-deep sm:text-sm">
+          Late Mr Jitendra Brahmbhatt
+          <br />
+          Late Mrs Ramila Brahmbhatt
+          <br />
+          Late Mr JAIMEEN Brahmbhatt
+        </p>
+      </div>
+
       <div className="mt-5 flex animate-rise flex-col items-center gap-1.5 [animation-delay:.55s]">
         <p className="font-heading text-xl tracking-[0.24em] text-maroon-deep sm:text-2xl">PRESS THE LOGO</p>
         <p className="font-serif text-lg italic text-maroon sm:text-xl">&amp; step into our love story</p>
