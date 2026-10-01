@@ -176,14 +176,6 @@ function MusicPlayer() {
           >
             Tap to open the invitation
           </button>
-          <p className="relative mt-4 flex items-center gap-2 font-serif text-base italic text-maroon/80">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M9 18V5l12-2v13" />
-              <circle cx="6" cy="18" r="3" />
-              <circle cx="18" cy="16" r="3" />
-            </svg>
-            with music
-          </p>
         </div>
       ) : null}
       <audio ref={audioRef} src="/music.mp3" loop preload="metadata" onPause={() => setPlaying(false)} onPlay={() => setPlaying(true)} />
