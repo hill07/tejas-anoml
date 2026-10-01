@@ -107,31 +107,49 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
         />
       ))}
 
-      {/* lettering */}
-      <div key={String(active)} className="absolute inset-x-0 top-0 z-10 pl-[9%] pr-[7%] pt-[7%] text-right">
+      {/* Readable event-details panel, kept inside the invitation card. */}
+      <div
+        key={String(active)}
+        className="absolute inset-x-[4%] top-[4%] z-10 rounded-xl border px-[5%] py-[4%] text-center shadow-lg"
+        style={{
+          background: event.slug === 'welcome-party' || event.slug === 'reception'
+            ? 'rgba(24, 12, 30, 0.76)'
+            : 'rgba(255, 251, 242, 0.88)',
+          borderColor: event.slug === 'welcome-party' || event.slug === 'reception'
+            ? 'rgba(247, 217, 160, 0.55)'
+            : 'rgba(122, 24, 48, 0.22)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          color: event.slug === 'welcome-party' || event.slug === 'reception' ? '#fff4df' : '#54202b',
+        }}
+      >
         <h2
-          className={`font-script leading-[1.05] ${active ? 'inv-in' : ''}`}
-          style={{ color: theme.title, fontSize: 'clamp(1.35rem, 10.5cqw, 2.8rem)', textShadow: event.slug === 'welcome-party' || event.slug === 'reception' ? '0 2px 8px rgba(0,0,0,.55)' : '0 1px 3px rgba(255,255,255,.85)' }}
+          className={`font-script leading-tight break-words ${active ? 'inv-in' : ''}`}
+          style={{
+            color: event.slug === 'welcome-party' || event.slug === 'reception' ? '#f7d9a0' : '#7a1830',
+            fontSize: 'clamp(1.45rem, 10cqw, 2.65rem)',
+            textShadow: '0 1px 2px rgba(0,0,0,.18)',
+          }}
         >
           {event.name}
         </h2>
         <p
-          className={`mt-[3cqw] font-serif font-semibold leading-snug ${active ? 'inv-in' : ''}`}
-          style={{ color: theme.text, fontSize: 'clamp(.72rem, 3.8cqw, 1.05rem)', textShadow: event.slug === 'welcome-party' || event.slug === 'reception' ? '0 1px 4px rgba(0,0,0,.55)' : '0 1px 2px rgba(255,255,255,.9)', animationDelay: '.25s' }}
+          className={`mt-[2cqw] font-serif font-semibold leading-snug ${active ? 'inv-in' : ''}`}
+          style={{ fontSize: 'clamp(.72rem, 3.7cqw, 1rem)', animationDelay: '.25s' }}
         >
-          {event.dateLabel} <span className="opacity-70">|</span> {formatTime(event.startTime)}
+          {event.dateLabel} <span className="opacity-60">|</span> {formatTime(event.startTime)}
         </p>
         <p
-          className={`mt-[2.5cqw] font-serif font-semibold leading-snug ${active ? 'inv-in' : ''}`}
-          style={{ color: theme.text, fontSize: 'clamp(.72rem, 3.8cqw, 1.05rem)', textShadow: event.slug === 'welcome-party' || event.slug === 'reception' ? '0 1px 4px rgba(0,0,0,.55)' : '0 1px 2px rgba(255,255,255,.9)', animationDelay: '.45s' }}
+          className={`mt-[2cqw] font-serif font-semibold leading-snug ${active ? 'inv-in' : ''}`}
+          style={{ fontSize: 'clamp(.72rem, 3.7cqw, 1rem)', animationDelay: '.45s' }}
         >
-          Venue:
+          <span className="opacity-75">Venue:</span>
           <br />
-          {event.venue}
+          <span className="break-words">{event.venue}</span>
         </p>
         <p
-          className={`mt-[2cqw] font-serif italic ${active ? 'inv-in' : ''}`}
-          style={{ color: theme.text, fontSize: 'clamp(.68rem, 3.3cqw, .95rem)', opacity: 0.95, textShadow: event.slug === 'welcome-party' || event.slug === 'reception' ? '0 1px 4px rgba(0,0,0,.55)' : '0 1px 2px rgba(255,255,255,.9)', animationDelay: '.65s' }}
+          className={`mt-[1.5cqw] font-serif italic leading-snug ${active ? 'inv-in' : ''}`}
+          style={{ fontSize: 'clamp(.68rem, 3.2cqw, .9rem)', opacity: 0.96, animationDelay: '.65s' }}
         >
           {event.dressCode}
         </p>
