@@ -40,6 +40,7 @@ const SPARKS = Array.from({ length: 16 }, (_, i) => ({
 export function InviteCard({ event, active }: { event: WeddingEvent; active: boolean }) {
   const theme = themeFor(event.slug);
   const Scene = theme.scene;
+  const photo = EVENT_BACKGROUNDS[event.slug];
 
   return (
     <article
@@ -47,12 +48,18 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
       className="inv-card relative aspect-[9/16] w-full overflow-hidden rounded-2xl"
       style={{ background: theme.background, containerType: 'inline-size' } as CSSProperties}
     >
-      {/* Event photo backdrop; the crimson velvet outside the card is unchanged. */}
-      <div
-        className="pointer-events-none absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url("${EVENT_BACKGROUNDS[event.slug] ?? ''}")` }}
-        aria-hidden="true"
-      />
+      {/* Event photo backdrop; events without a photo fall back to the drawn scene. */}
+      {photo ? (
+        <div
+          className="pointer-events-none absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url("${photo}")` }}
+          aria-hidden="true"
+        />
+      ) : (
+        <svg viewBox="0 0 360 640" preserveAspectRatio="xMidYMax slice" className="inv-kenburns absolute inset-0 h-full w-full" aria-hidden="true">
+          <Scene />
+        </svg>
+      )}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
