@@ -69,7 +69,7 @@ function Hero() {
 
       <div className="mt-2 animate-rise px-2 text-center [animation-delay:.45s]">
         <p className="font-serif text-xs italic leading-relaxed text-maroon-deep sm:text-sm">
-          With loving memory of
+          First With loving memory of
         </p>
         <p className="mt-1 font-serif text-xs font-bold leading-relaxed text-maroon-deep sm:text-sm">
           Late Mr Jitendra Brahmbhatt
@@ -79,7 +79,7 @@ function Hero() {
           Late Mr JAIMEEN Brahmbhatt
         </p>
         <p className="mt-2 font-serif text-xs italic leading-relaxed text-maroon-deep sm:text-sm">
-          Joyfully invite you to celebrate the union of their daughter
+          Joyfully invite you to celebrate the union of their son
         </p>
       </div>
 
