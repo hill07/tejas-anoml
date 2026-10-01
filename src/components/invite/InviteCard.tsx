@@ -60,22 +60,7 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
           <Scene />
         </svg>
       )}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            event.slug === 'welcome-party' || event.slug === 'reception'
-              ? 'linear-gradient(180deg, rgba(20,10,25,.72) 0%, rgba(20,10,25,.48) 24%, rgba(20,10,25,.08) 46%, transparent 60%, rgba(20,10,25,.12) 100%)'
-              : 'linear-gradient(180deg, rgba(255,250,239,.9) 0%, rgba(255,250,239,.72) 24%, rgba(255,250,239,.22) 43%, transparent 58%, rgba(35,12,25,.08) 100%)',
-        }}
-        aria-hidden="true"
-      />
-      {/* Subtle animated paper-like highlights over the photo. */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-40 mix-blend-soft-light"
-        style={{ background: 'radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.55), transparent 55%), radial-gradient(ellipse at 80% 90%, rgba(255,255,255,.3), transparent 60%)' }}
-        aria-hidden="true"
-      />
+
 
       {theme.sparkle
         ? SPARKS.map((s, i) => (
@@ -107,15 +92,12 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
         />
       ))}
 
-      {/* Event lettering without a backing panel. */}
+      {/* Centered event lettering, with no panel, shadow, or photo overlay. */}
       <div
         key={String(active)}
-        className="absolute inset-x-[5%] top-[5%] z-10 px-[3%] text-center"
+        className="absolute inset-x-[5%] top-1/2 z-10 -translate-y-1/2 px-[3%] text-center"
         style={{
           color: event.slug === 'welcome-party' || event.slug === 'reception' ? '#fff4df' : '#54202b',
-          textShadow: event.slug === 'welcome-party' || event.slug === 'reception'
-            ? '0 1px 3px rgba(0,0,0,.9), 0 0 10px rgba(0,0,0,.45)'
-            : '0 1px 3px rgba(255,255,255,.95), 0 0 8px rgba(255,255,255,.75)',
         }}
       >
         <h2
