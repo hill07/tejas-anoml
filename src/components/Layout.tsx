@@ -80,29 +80,28 @@ function MusicPlayer() {
     const audio = audioRef.current;
     if (!audio) return;
 
-    // Try autoplay on page load. Browsers may block audible autoplay;
-    // if so, start on the visitor's first interaction anywhere on the page.
-    const startMusic = () => {
-      void audio.play().catch(() => {
-        setPlaying(false);
-      });
-    };
+    // Browsers block audible autoplay until the visitor interacts with the page,
+    // so try once on load and then again on each interaction until it starts.
+    // Only events that count as a user gesture are used: on touch screens that is
+    // the finger lifting (touchend / pointerup / click), not touchstart / pointerdown.
+    const gestures = ['click', 'pointerup', 'touchend', 'keydown'] as const;
+    const stopListening = () => gestures.forEach((g) => window.removeEventListener(g, startMusic));
+    function startMusic(e?: Event) {
+      if (!audio || !audio.paused) return;
+      // The music button handles its own taps.
+      if (e?.target instanceof Element && e.target.closest('[data-music-toggle]')) return;
+      audio.play().then(stopListening, () => setPlaying(false));
+    }
+
+    gestures.forEach((g) => window.addEventListener(g, startMusic, { passive: true }));
+    // Once it is playing (by any route, including the music button) stop auto-starting,
+    // so a visitor who pauses it is not overridden by their next tap.
+    audio.addEventListener('playing', stopListening, { once: true });
     startMusic();
 
-    const resumeOnInteraction = () => {
-      if (audio.paused) startMusic();
-      window.removeEventListener('pointerdown', resumeOnInteraction);
-      window.removeEventListener('keydown', resumeOnInteraction);
-      window.removeEventListener('touchstart', resumeOnInteraction);
-    };
-    window.addEventListener('pointerdown', resumeOnInteraction, { once: true });
-    window.addEventListener('keydown', resumeOnInteraction, { once: true });
-    window.addEventListener('touchstart', resumeOnInteraction, { once: true });
-
     return () => {
-      window.removeEventListener('pointerdown', resumeOnInteraction);
-      window.removeEventListener('keydown', resumeOnInteraction);
-      window.removeEventListener('touchstart', resumeOnInteraction);
+      stopListening();
+      audio.removeEventListener('playing', stopListening);
     };
   }, []);
 
@@ -124,12 +123,13 @@ function MusicPlayer() {
 
   return (
     <>
-      <audio ref={audioRef} src="/music.mp3" loop preload="auto" onPause={() => setPlaying(false)} onPlay={() => setPlaying(true)} />
+      <audio ref={audioRef} src="/music.mp3" loop preload="metadata" onPause={() => setPlaying(false)} onPlay={() => setPlaying(true)} />
       <button
         type="button"
         onClick={toggleMusic}
         aria-label={playing ? 'Pause background music' : 'Play background music'}
         aria-pressed={playing}
+        data-music-toggle
         className="fixed bottom-24 right-4 z-40 grid h-11 w-11 place-items-center rounded-full border border-[hsl(var(--gold-light)/0.65)] bg-maroon-deep/95 text-gold-light shadow-lg transition hover:scale-105 sm:right-6"
       >
         {playing ? (
