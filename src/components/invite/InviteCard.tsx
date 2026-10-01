@@ -97,13 +97,13 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
         key={String(active)}
         className="absolute inset-x-[5%] top-1/2 z-10 -translate-y-1/2 px-[3%] text-center"
         style={{
-          color: event.slug === 'welcome-party' || event.slug === 'reception' ? '#fff4df' : '#54202b',
+          color: event.slug === 'reception' ? '#fff4df' : '#54202b',
         }}
       >
         <h2
           className={`font-script leading-tight break-words ${active ? 'inv-in' : ''}`}
           style={{
-            color: event.slug === 'welcome-party' || event.slug === 'reception' ? '#f7d9a0' : '#7a1830',
+            color: event.slug === 'reception' ? '#f7d9a0' : '#7a1830',
             fontSize: 'clamp(1.45rem, 10cqw, 2.65rem)',
           }}
         >
