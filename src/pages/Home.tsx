@@ -15,15 +15,15 @@ import mdina1280 from '../assets/malta-mdina-1280.webp';
 
 const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
-const doors: { to: string; label: string; art: DoorArtKind }[] = [
-  { to: '/story', label: 'Our Story', art: 'story' },
-  { to: '/schedule', label: 'Wedding Invite', art: 'invite' },
-  { to: '/wardrobe', label: 'Wardrobe Planner', art: 'wardrobe' },
-  { to: '/travel', label: 'Travel Info', art: 'travel' },
-  { to: '/guide', label: 'Wedding Guide', art: 'guide' },
+const doors: { to: string; label: string; art: DoorArtKind; icon?: string }[] = [
+  { to: '/story', label: 'Our Story', art: 'story', icon: '/ourstory.png' },
+  { to: '/schedule', label: 'Wedding Invite', art: 'invite', icon: '/weddinginvite.png' },
+  { to: '/wardrobe', label: 'Wardrobe Planner', art: 'wardrobe', icon: '/wardroom.png' },
+  { to: '/travel', label: 'Travel Info', art: 'travel', icon: '/travelinfo.png' },
+  { to: '/guide', label: 'Wedding Guide', art: 'guide', icon: '/weddingguide.png' },
   { to: '/gallery', label: 'Gallery', art: 'gallery' },
   { to: '/rsvp', label: 'RSVP', art: 'rsvp' },
-  { to: '/more', label: 'More', art: 'more' },
+  { to: '/more', label: 'More', art: 'more', icon: '/more.png' },
 ];
 
 function Hero() {
@@ -161,7 +161,7 @@ function StepInside() {
         <SectionRule label="Step inside" />
       </div>
       <ul className="mx-auto mt-10 flex max-w-md flex-col gap-9 sm:max-w-lg sm:gap-11">
-        {doors.map(({ to, label, art }, i) => {
+        {doors.map(({ to, label, art, icon }, i) => {
           const left = i % 2 === 0;
           return (
             <li key={to}>
@@ -171,7 +171,11 @@ function StepInside() {
                   className={`group flex items-center gap-5 sm:gap-8 ${left ? 'justify-start pl-[6%]' : 'flex-row-reverse justify-start pr-[6%]'}`}
                 >
                   <OrnateFrame className="w-[6.5rem] shrink-0 transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-[-1.5deg] sm:w-32">
-                    <DoorArt kind={art} className="transition-transform duration-700 group-hover:scale-105" />
+                    {icon ? (
+                      <img src={icon} alt="" loading="lazy" decoding="async" className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105" />
+                    ) : (
+                      <DoorArt kind={art} className="transition-transform duration-700 group-hover:scale-105" />
+                    )}
                   </OrnateFrame>
                   <span
                     className="max-w-[9rem] font-heading text-sm uppercase leading-snug tracking-[0.2em] text-maroon-deep sm:text-lg"
