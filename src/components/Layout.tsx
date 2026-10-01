@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { Monogram } from './Monogram';
 import { OrnamentDivider } from './Ornaments';
@@ -72,6 +72,53 @@ function HomeBadge() {
   );
 }
 
+function MusicPlayer() {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  const toggleMusic = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (playing) {
+      audio.pause();
+      setPlaying(false);
+      return;
+    }
+    try {
+      await audio.play();
+      setPlaying(true);
+    } catch {
+      setPlaying(false);
+    }
+  };
+
+  return (
+    <>
+      <audio ref={audioRef} src="/music.mp3" loop preload="none" onPause={() => setPlaying(false)} onPlay={() => setPlaying(true)} />
+      <button
+        type="button"
+        onClick={toggleMusic}
+        aria-label={playing ? 'Pause background music' : 'Play background music'}
+        aria-pressed={playing}
+        className="fixed bottom-24 right-4 z-40 grid h-11 w-11 place-items-center rounded-full border border-[hsl(var(--gold-light)/0.65)] bg-maroon-deep/95 text-gold-light shadow-lg transition hover:scale-105 sm:right-6"
+      >
+        {playing ? (
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+            <rect x="6" y="4" width="4" height="16" rx="1" />
+            <rect x="14" y="4" width="4" height="16" rx="1" />
+          </svg>
+        ) : (
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M9 18V5l12-2v13" />
+            <circle cx="6" cy="18" r="3" />
+            <circle cx="18" cy="16" r="3" />
+          </svg>
+        )}
+      </button>
+    </>
+  );
+}
+
 export function AppShell() {
   const { pathname } = useLocation();
   return (
@@ -83,6 +130,7 @@ export function AppShell() {
       {pathname !== '/' && <HomeBadge />}
       <Outlet />
       <BottomNav />
+      <MusicPlayer />
       <InstallPrompt />
     </>
   );
