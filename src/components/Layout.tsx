@@ -76,6 +76,36 @@ function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
 
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    // Try autoplay on page load. Browsers may block audible autoplay;
+    // if so, start on the visitor's first interaction anywhere on the page.
+    const startMusic = () => {
+      void audio.play().catch(() => {
+        setPlaying(false);
+      });
+    };
+    startMusic();
+
+    const resumeOnInteraction = () => {
+      if (audio.paused) startMusic();
+      window.removeEventListener('pointerdown', resumeOnInteraction);
+      window.removeEventListener('keydown', resumeOnInteraction);
+      window.removeEventListener('touchstart', resumeOnInteraction);
+    };
+    window.addEventListener('pointerdown', resumeOnInteraction, { once: true });
+    window.addEventListener('keydown', resumeOnInteraction, { once: true });
+    window.addEventListener('touchstart', resumeOnInteraction, { once: true });
+
+    return () => {
+      window.removeEventListener('pointerdown', resumeOnInteraction);
+      window.removeEventListener('keydown', resumeOnInteraction);
+      window.removeEventListener('touchstart', resumeOnInteraction);
+    };
+  }, []);
+
   const toggleMusic = async () => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -94,7 +124,7 @@ function MusicPlayer() {
 
   return (
     <>
-      <audio ref={audioRef} src="/music.mp3" loop preload="none" onPause={() => setPlaying(false)} onPlay={() => setPlaying(true)} />
+      <audio ref={audioRef} src="/music.mp3" loop preload="auto" onPause={() => setPlaying(false)} onPlay={() => setPlaying(true)} />
       <button
         type="button"
         onClick={toggleMusic}
