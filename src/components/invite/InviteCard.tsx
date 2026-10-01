@@ -20,6 +20,13 @@ const PETALS = Array.from({ length: 12 }, (_, i) => ({
   drift: ((i % 2 ? 1 : -1) * (20 + ((i * 13) % 40))),
 }));
 
+const EVENT_BACKGROUNDS: Record<string, string> = {
+  'welcome-party': '/Mehndi.jpeg',
+  haldi: '/Haldi.jpeg',
+  wedding: '/Wedding.jpeg',
+  reception: '/reception.jpeg',
+};
+
 const SPARKS = Array.from({ length: 16 }, (_, i) => ({
   left: (i * 29 + 7) % 94,
   top: (i * 17 + 5) % 60,
@@ -40,16 +47,28 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
       className="inv-card relative aspect-[9/16] w-full overflow-hidden rounded-2xl"
       style={{ background: theme.background, containerType: 'inline-size' } as CSSProperties}
     >
-      {/* soft paper wash */}
+      {/* Event photo backdrop; the crimson velvet outside the card is unchanged. */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-50 mix-blend-soft-light"
+        className="pointer-events-none absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url("${EVENT_BACKGROUNDS[event.slug] ?? ''}")` }}
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            event.slug === 'welcome-party' || event.slug === 'reception'
+              ? 'linear-gradient(180deg, rgba(35,12,25,.38) 0%, rgba(35,12,25,.12) 48%, rgba(35,12,25,.3) 100%)'
+              : 'linear-gradient(180deg, rgba(255,248,232,.55) 0%, rgba(255,248,232,.12) 48%, rgba(35,12,25,.18) 100%)',
+        }}
+        aria-hidden="true"
+      />
+      {/* Subtle animated paper-like highlights over the photo. */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-40 mix-blend-soft-light"
         style={{ background: 'radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.55), transparent 55%), radial-gradient(ellipse at 80% 90%, rgba(255,255,255,.3), transparent 60%)' }}
         aria-hidden="true"
       />
-
-      <svg viewBox="0 0 360 640" preserveAspectRatio="xMidYMax slice" className="inv-kenburns absolute inset-0 h-full w-full" aria-hidden="true">
-        <Scene />
-      </svg>
 
       {theme.sparkle
         ? SPARKS.map((s, i) => (
