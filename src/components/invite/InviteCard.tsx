@@ -107,20 +107,15 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
         />
       ))}
 
-      {/* Readable event-details panel, kept inside the invitation card. */}
+      {/* Event lettering without a backing panel. */}
       <div
         key={String(active)}
-        className="absolute inset-x-[4%] top-[4%] z-10 rounded-xl border px-[5%] py-[4%] text-center shadow-lg"
+        className="absolute inset-x-[5%] top-[5%] z-10 px-[3%] text-center"
         style={{
-          background: event.slug === 'welcome-party' || event.slug === 'reception'
-            ? 'rgba(24, 12, 30, 0.76)'
-            : 'rgba(255, 251, 242, 0.88)',
-          borderColor: event.slug === 'welcome-party' || event.slug === 'reception'
-            ? 'rgba(247, 217, 160, 0.55)'
-            : 'rgba(122, 24, 48, 0.22)',
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
           color: event.slug === 'welcome-party' || event.slug === 'reception' ? '#fff4df' : '#54202b',
+          textShadow: event.slug === 'welcome-party' || event.slug === 'reception'
+            ? '0 1px 3px rgba(0,0,0,.9), 0 0 10px rgba(0,0,0,.45)'
+            : '0 1px 3px rgba(255,255,255,.95), 0 0 8px rgba(255,255,255,.75)',
         }}
       >
         <h2
@@ -128,7 +123,6 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
           style={{
             color: event.slug === 'welcome-party' || event.slug === 'reception' ? '#f7d9a0' : '#7a1830',
             fontSize: 'clamp(1.45rem, 10cqw, 2.65rem)',
-            textShadow: '0 1px 2px rgba(0,0,0,.18)',
           }}
         >
           {event.name}
@@ -137,19 +131,19 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
           className={`mt-[2cqw] font-serif font-semibold leading-snug ${active ? 'inv-in' : ''}`}
           style={{ fontSize: 'clamp(.72rem, 3.7cqw, 1rem)', animationDelay: '.25s' }}
         >
-          {event.dateLabel} <span className="opacity-60">|</span> {formatTime(event.startTime)}
+          {event.dateLabel} <span className="opacity-70">|</span> {formatTime(event.startTime)}
         </p>
         <p
           className={`mt-[2cqw] font-serif font-semibold leading-snug ${active ? 'inv-in' : ''}`}
           style={{ fontSize: 'clamp(.72rem, 3.7cqw, 1rem)', animationDelay: '.45s' }}
         >
-          <span className="opacity-75">Venue:</span>
+          <span className="opacity-80">Venue:</span>
           <br />
           <span className="break-words">{event.venue}</span>
         </p>
         <p
           className={`mt-[1.5cqw] font-serif italic leading-snug ${active ? 'inv-in' : ''}`}
-          style={{ fontSize: 'clamp(.68rem, 3.2cqw, .9rem)', opacity: 0.96, animationDelay: '.65s' }}
+          style={{ fontSize: 'clamp(.68rem, 3.2cqw, .9rem)', opacity: 1, animationDelay: '.65s' }}
         >
           {event.dressCode}
         </p>
