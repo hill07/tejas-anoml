@@ -4,6 +4,7 @@ import { Monogram } from './Monogram';
 import { OrnamentDivider } from './Ornaments';
 import { CalendarIcon, EllipsisIcon, FlowerIcon, HouseIcon, MailIcon, PlaneIcon, ShirtIcon } from './Icons';
 import { InstallPrompt } from './InstallPrompt';
+import { couple } from '../data/wedding';
 
 const navItems = [
   { to: '/', label: 'Home', Icon: HouseIcon },
@@ -121,8 +122,70 @@ function MusicPlayer() {
     }
   };
 
+  // Opening cover: browsers only allow sound after a tap, so the invitation opens
+  // with one — and that same tap starts the music.
+  const [cover, setCover] = useState<'shown' | 'leaving' | 'gone'>('shown');
+  const openButton = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (cover === 'gone') return;
+    const root = document.documentElement;
+    const previous = root.style.overflow;
+    root.style.overflow = 'hidden';
+    return () => {
+      root.style.overflow = previous;
+    };
+  }, [cover]);
+
+  useEffect(() => {
+    openButton.current?.focus({ preventScroll: true });
+  }, []);
+
+  const openInvitation = () => {
+    const audio = audioRef.current;
+    if (audio?.paused) audio.play().catch(() => setPlaying(false));
+    setCover('leaving');
+    window.setTimeout(() => setCover('gone'), 900);
+  };
+
   return (
     <>
+      {cover !== 'gone' ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Open the invitation"
+          className={`bg-velvet-taupe fixed inset-0 z-[70] flex flex-col items-center justify-center overflow-hidden px-6 text-center transition-[opacity,transform] duration-[900ms] ease-out ${
+            cover === 'leaving' ? 'pointer-events-none scale-105 opacity-0' : 'opacity-100'
+          }`}
+        >
+          <span
+            className="pointer-events-none absolute h-80 w-80 animate-breathe rounded-full"
+            style={{ background: 'radial-gradient(circle, hsl(42 80% 80% / .6), hsl(348 60% 85% / .25) 55%, transparent 72%)' }}
+            aria-hidden="true"
+          />
+          <Monogram eager sizes="224px" alt="" className="relative h-52 w-52 animate-rock object-contain sm:h-56 sm:w-56" />
+          <p className="relative mt-2 font-script text-5xl leading-tight text-maroon-deep sm:text-6xl">{couple.names}</p>
+          <OrnamentDivider className="relative mt-4" />
+          <button
+            ref={openButton}
+            type="button"
+            onClick={openInvitation}
+            data-music-toggle
+            className="btn-primary relative mt-8 px-7 py-4 text-[13px]"
+          >
+            Tap to open the invitation
+          </button>
+          <p className="relative mt-4 flex items-center gap-2 font-serif text-base italic text-maroon/80">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M9 18V5l12-2v13" />
+              <circle cx="6" cy="18" r="3" />
+              <circle cx="18" cy="16" r="3" />
+            </svg>
+            with music
+          </p>
+        </div>
+      ) : null}
       <audio ref={audioRef} src="/music.mp3" loop preload="metadata" onPause={() => setPlaying(false)} onPlay={() => setPlaying(true)} />
       <button
         type="button"
