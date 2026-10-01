@@ -69,7 +69,7 @@ function Hero() {
 
       <div className="mt-2 animate-rise px-2 text-center [animation-delay:.45s]">
         <p className="font-serif text-xs italic leading-relaxed text-maroon-deep sm:text-sm">
-          With loving memory of
+          First With loving memory of
         </p>
         <p className="mt-1 font-serif text-xs leading-relaxed text-maroon-deep sm:text-sm">
           Late Mr Jitendra Brahmbhatt
