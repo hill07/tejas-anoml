@@ -12,7 +12,7 @@ export const couple = {
   tagline: 'Two hearts, one love, and a lifetime of togetherness.',
   welcome:
     'With the blessings of our families, we warmly invite you to celebrate the wedding festivities of Anmol and Tejas. We look forward to sharing these special moments with you.',
-  families: 'Anmol, daughter of Mr Prashant & Karuna Brahmbhatt, and Tejas, son of Mr HEMANG Bhatt & Mrs Neela Bhatt',
+  families: 'Anmol, daughter of Mr Prashant & Karuna Brahmbhatt, and Tejas, son of Mr HEMANG Bhatt & Late Mrs Neela Bhatt',
 };
 
 export type Invited = 'all' | 'anmol' | 'tejas';
