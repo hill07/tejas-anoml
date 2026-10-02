@@ -76,10 +76,10 @@ function Hero() {
           <br />
           Late Mrs Ramila Brahmbhatt
           <br />
-          Late Mr JAIMEEN Brahmbhatt
+          Late Mr Jaimeen Brahmbhatt
         </p>
         <p className="mt-2 font-serif text-xs italic leading-relaxed text-maroon-deep sm:text-sm">
-          Joyfully invite you to celebrate the union of their son
+          Joyfully invite you to celebrate the union of their daughter
         </p>
       </div>
 
