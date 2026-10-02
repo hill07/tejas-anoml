@@ -8,6 +8,10 @@ import { useDocumentTitle } from '../lib/useDocumentTitle';
 import mdina640 from '../assets/malta-mdina-640.webp';
 import mdina1280 from '../assets/malta-mdina-1280.webp';
 
+// Switch a section back on by changing false to true.
+const SHOW_WHERE_TO_STAY: boolean = false;
+const SHOW_WEDDING_COACHES: boolean = false;
+
 function Section({ label, children }: { label: string; children: ReactNode }) {
   return (
     <section className="mt-12">
@@ -94,7 +98,7 @@ export default function Travel() {
         ))}
       </Section>
 
-      {/* <Section label="Where to stay">
+      {SHOW_WHERE_TO_STAY && (<Section label="Where to stay">
         {travel.hotels.map((h) => (
           <Reveal as="article" key={h.name} className="card">
             <div className="flex flex-wrap items-start justify-between gap-2">
@@ -114,9 +118,9 @@ export default function Travel() {
           <p className="eyebrow">Check-in &amp; check-out</p>
           <p className="mt-2 text-lg leading-relaxed">{travel.checkIn}</p>
         </Reveal>
-      </Section> */}
+      </Section>)}
 
-      {/* <Section label="Wedding coaches">
+      {SHOW_WEDDING_COACHES && (<Section label="Wedding coaches">
         <Reveal className="card">
           <ul className="divide-y divide-[hsl(var(--gold)/0.25)]">
             {travel.shuttles.map((s) => (
@@ -134,7 +138,7 @@ export default function Travel() {
             {travel.pickup}
           </p>
         </Reveal>
-      </Section> */}
+      </Section>)}
 
       <Section label="Getting around">
         <Reveal className="card">
