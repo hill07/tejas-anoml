@@ -94,7 +94,7 @@ export default function Travel() {
         ))}
       </Section>
 
-      <Section label="Where to stay">
+      {/* <Section label="Where to stay">
         {travel.hotels.map((h) => (
           <Reveal as="article" key={h.name} className="card">
             <div className="flex flex-wrap items-start justify-between gap-2">
@@ -114,9 +114,9 @@ export default function Travel() {
           <p className="eyebrow">Check-in &amp; check-out</p>
           <p className="mt-2 text-lg leading-relaxed">{travel.checkIn}</p>
         </Reveal>
-      </Section>
+      </Section> */}
 
-      <Section label="Wedding coaches">
+      {/* <Section label="Wedding coaches">
         <Reveal className="card">
           <ul className="divide-y divide-[hsl(var(--gold)/0.25)]">
             {travel.shuttles.map((s) => (
@@ -134,7 +134,7 @@ export default function Travel() {
             {travel.pickup}
           </p>
         </Reveal>
-      </Section>
+      </Section> */}
 
       <Section label="Getting around">
         <Reveal className="card">
