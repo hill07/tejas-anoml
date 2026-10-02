@@ -193,39 +193,38 @@ export const travel = {
     'Guests from all three regions should aim to land by Saturday 26 June — the first events begin Sunday morning. Family arriving for the pujas, please fly in by Friday 25 June.',
   flights: [
     {
-      region: 'From the UK',
-      intro: undefined as string | undefined,
+      region: 'Botswana to Malta',
+      intro:
+        'There are no direct flights from India to Malta. The smoothest one-stop routes go through the Gulf or Istanbul, with a total journey of 11–14 hours.',
       routes: [
-        'London Heathrow → Malta — direct, KM Malta Airlines and British Airways (about 3 hrs 20 min)',
-        'London Gatwick and London Luton → Malta — direct, easyJet and Ryanair',
-        'Manchester and Birmingham → Malta — direct, easyJet, Jet2 and Ryanair',
-        'Edinburgh, Bristol and Leeds Bradford → Malta — summer routes run most days; otherwise connect through London or Amsterdam',
+        'No Direct Flights: There are currently no non-stop commercial flights operating directly between Botswana and Malta',
+        '2. Common Connecting Hubs: Travelers usually depart from Sir Seretse Khama International Airport (GBE) in Gaborone. Common 1-to-2 stop flight paths connect north through major international hubs such as Johannesburg (JNB), Doha (DOH), or Dubai (DXB) using airlines like Skyscanner / Emirates or Ethiopian Airlines.',
+        '3. Total Travel Time: Depending on your layover schedules, a typical multi-stop flight journey takes between 18 and 21 hours to reach Malta International Airport (MLA).',
       ],
       note: undefined as string | undefined,
     },
     {
-      region: 'From India',
-      intro:
-        'There are no direct flights from India to Malta. The smoothest one-stop routes go through the Gulf or Istanbul, with a total journey of 11–14 hours.',
+      region: 'Johannesburg to Malta',
+      intro: undefined as string | undefined,
       routes: [
-        'Mumbai or Delhi → Dubai → Malta — Emirates, one stop',
-        'Mumbai or Delhi → Doha → Malta — Qatar Airways, one stop',
-        'Delhi or Mumbai → Istanbul → Malta — Turkish Airlines, one stop',
-        'Ahmedabad → Dubai or Doha → Malta — same one-stop routes from your nearest hub',
+        'Straight-Line Distance: About 4,362 miles (7,020 kilometers)',
+        'Flight Route: There are no direct flights. You must book a connecting flight leaving from O.R. Tambo International Airport (JNB) and arriving at Malta International Airport (MLA).',
+        'Common Layovers: Popular stops include Istanbul (IST) via Turkish Airlines or cities like Frankfurt and Zurich via carriers such as Lufthansa and SWISS.',
+        'Travel Time: Total journey times average between 14 to 18 hours depending on your layover.',
       ],
       note: 'Indian passport holders need a Schengen visa for Malta. Apply well in advance through VFS Global — we can provide a wedding invitation letter for your appointment.',
     },
-    {
-      region: 'From the US',
-      intro:
-        'There are no direct flights from the US to Malta, so plan for one stop through a European hub — around 12–14 hours door to door.',
-      routes: [
-        'New York (JFK/Newark), Boston, Chicago, Washington → London Heathrow → Malta — one ticket with British Airways',
-        'US cities → Frankfurt, Munich, Paris or Rome → Malta — Lufthansa, Air France, ITA Airways and United partners',
-        'US East Coast → Amsterdam → Malta — KLM',
-      ],
-      note: 'Book the whole journey on a single ticket so bags are checked through. Arrive by Saturday 26 June and fly home on or after Thursday 1 July.',
-    },
+    // {
+    //   region: 'From the US',
+    //   intro:
+    //     'There are no direct flights from the US to Malta, so plan for one stop through a European hub — around 12–14 hours door to door.',
+    //   routes: [
+    //     'New York (JFK/Newark), Boston, Chicago, Washington → London Heathrow → Malta — one ticket with British Airways',
+    //     'US cities → Frankfurt, Munich, Paris or Rome → Malta — Lufthansa, Air France, ITA Airways and United partners',
+    //     'US East Coast → Amsterdam → Malta — KLM',
+    //   ],
+    //   note: 'Book the whole journey on a single ticket so bags are checked through. Arrive by Saturday 26 June and fly home on or after Thursday 1 July.',
+    // },
   ],
   ferry: {
     name: 'Valletta & Sliema ferries',
