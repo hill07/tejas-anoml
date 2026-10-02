@@ -197,9 +197,8 @@ export const travel = {
       intro:
         'There are no direct flights from India to Malta. The smoothest one-stop routes go through the Gulf or Istanbul, with a total journey of 11–14 hours.',
       routes: [
-        'No Direct Flights: There are currently no non-stop commercial flights operating directly between Botswana and Malta',
-        '2. Common Connecting Hubs: Travelers usually depart from Sir Seretse Khama International Airport (GBE) in Gaborone. Common 1-to-2 stop flight paths connect north through major international hubs such as Johannesburg (JNB), Doha (DOH), or Dubai (DXB) using airlines like Skyscanner / Emirates or Ethiopian Airlines.',
-        '3. Total Travel Time: Depending on your layover schedules, a typical multi-stop flight journey takes between 18 and 21 hours to reach Malta International Airport (MLA).',
+        'Common Connecting Hubs: Travelers usually depart from Sir Seretse Khama International Airport (GBE) in Gaborone. Common 1-to-2 stop flight paths connect north through major international hubs such as Johannesburg (JNB), Doha (DOH), or Dubai (DXB) using airlines like Skyscanner / Emirates or Ethiopian Airlines.',
+        'Total Travel Time: Depending on your layover schedules, a typical multi-stop flight journey takes between 18 and 21 hours to reach Malta International Airport (MLA).',
       ],
       note: undefined as string | undefined,
     },
