@@ -104,20 +104,21 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
           className={`font-script leading-tight break-words ${active ? 'inv-in' : ''}`}
           style={{
             color: event.slug === 'reception' ? '#f7d9a0' : '#7a1830',
-            fontSize: 'clamp(1.45rem, 10cqw, 2.65rem)',
+            fontSize: 'clamp(1.65rem, 11cqw, 2.9rem)',
           }}
         >
           {event.name}
         </h2>
-        <p
-          className={`mt-[2cqw] font-serif font-semibold leading-snug ${active ? 'inv-in' : ''}`}
-          style={{ fontSize: 'clamp(.72rem, 3.7cqw, 1rem)', animationDelay: '.25s' }}
+        <div
+          className={`mt-[2.5cqw] font-serif font-semibold leading-relaxed ${active ? 'inv-in' : ''}`}
+          style={{ fontSize: 'clamp(.82rem, 4.3cqw, 1.15rem)', animationDelay: '.25s' }}
         >
-          {event.dateLabel} <span className="opacity-70">|</span> {formatTime(event.startTime)}
-        </p>
+          <p>{event.dateLabel}</p>
+          <p className="mt-[.8cqw]">{formatTime(event.startTime)}</p>
+        </div>
         <p
           className={`mt-[2cqw] font-serif font-semibold leading-snug ${active ? 'inv-in' : ''}`}
-          style={{ fontSize: 'clamp(.72rem, 3.7cqw, 1rem)', animationDelay: '.45s' }}
+          style={{ fontSize: 'clamp(.82rem, 4.3cqw, 1.15rem)', animationDelay: '.45s' }}
         >
           <span className="opacity-80">Venue:</span>
           <br />
@@ -125,7 +126,7 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
         </p>
         <p
           className={`mt-[1.5cqw] font-serif italic leading-snug ${active ? 'inv-in' : ''}`}
-          style={{ fontSize: 'clamp(.68rem, 3.2cqw, .9rem)', opacity: 1, animationDelay: '.65s' }}
+          style={{ fontSize: 'clamp(.76rem, 3.8cqw, 1rem)', opacity: 1, animationDelay: '.65s' }}
         >
           {event.dressCode}
         </p>
