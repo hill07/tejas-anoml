@@ -7,7 +7,7 @@ export const couple = {
   dateLabel: '30 June – 2 July 2027',
   mainDateLabel: 'Thursday 1 July 2027',
   shortDate: '30.06.27 – 02.07.27',
-  place: 'Olive Gardens & Ballroom Upper Terrace',
+  place: '',
   weddingDate: '2027-07-01T18:00:00+05:30',
   tagline: 'Two hearts, one love, and a lifetime of togetherness.',
   welcome:
