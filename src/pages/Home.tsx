@@ -20,11 +20,11 @@ const doors: { to: string; label: string; art: DoorArtKind; icon?: string }[] = 
   { to: '/schedule', label: 'Wedding Invite', art: 'invite', icon: '/weddinginvite.png' },
   { to: '/wardrobe', label: 'Wardrobe Planner', art: 'wardrobe', icon: '/wardroom.png' },
   { to: '/travel', label: 'Travel Info', art: 'travel', icon: '/travelinfo.png' },
-  { to: '/things-to-do', label: 'Things to Do', art: 'travel' },
   { to: '/guide', label: 'Wedding Guide', art: 'guide', icon: '/weddingguide.png' },
   { to: '/gallery', label: 'Gallery', art: 'gallery' },
   { to: '/rsvp', label: 'RSVP', art: 'rsvp' },
   { to: '/more', label: 'More', art: 'more', icon: '/more.png' },
+  { to: '/things-to-do', label: 'Things to Do', art: 'travel' },
 ];
 
 function Hero() {
