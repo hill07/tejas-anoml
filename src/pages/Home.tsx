@@ -7,8 +7,7 @@ import { Monogram } from '../components/Monogram';
 import { FloralSpray, GoldCorners, OrnamentDivider, SectionRule, TornEdge } from '../components/Ornaments';
 import { Reveal } from '../components/Reveal';
 import { ScratchCard } from '../components/ScratchCard';
-import { couple, mapsUrl } from '../data/wedding';
-import { nextEvent } from '../lib/events';
+import { couple } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 import mdina640 from '../assets/malta-mdina-640.webp';
 import mdina1280 from '../assets/malta-mdina-1280.webp';
@@ -24,7 +23,7 @@ const doors: { to: string; label: string; art: DoorArtKind; icon?: string }[] = 
   { to: '/gallery', label: 'Gallery', art: 'gallery' },
   { to: '/rsvp', label: 'RSVP', art: 'rsvp' },
   { to: '/more', label: 'More', art: 'more', icon: '/more.png' },
-  { to: '/things-to-do', label: 'Things to Do', art: 'travel',icon: '/thingstodo.png'},
+  { to: '/things-to-do', label: 'Things to Do', art: 'travel', icon: '/thingstodo.png' },
 ];
 
 function Hero() {
@@ -102,10 +101,8 @@ function StepInside() {
 }
 
 function Welcome() {
-  const next = nextEvent();
   return <section className="bg-paper px-5 pb-40 pt-14"><div className="mx-auto grid max-w-2xl gap-10">
     <Reveal as="article" className="card px-6 py-10 text-center sm:px-12"><GoldCorners /><SectionRule label="Welcome" /><p className="mt-5 font-serif text-xl leading-relaxed text-ink">{couple.welcome}</p><p className="mt-5 inline-block rounded-full bg-maroon-deep px-4 py-1.5 font-serif text-base font-semibold tracking-wide text-gold-light">{couple.hashtag}</p><p className="mt-5 font-heading text-[11px] uppercase leading-relaxed tracking-[0.18em] text-gold-deep">{couple.families}</p></Reveal>
-    {next ? <Reveal as="section"><SectionRule label="Up next" /><article className="card mt-4"><p className="eyebrow">{next.dateLabel} · {next.startTime}</p><h3 className="mt-1 font-heading text-2xl text-maroon-deep">{next.name}</h3><p className="mt-1 text-base text-muted">{next.venue}</p><dl className="mt-4 grid grid-cols-2 gap-3"><div><dt className="eyebrow text-[10px]">Arrive by</dt><dd className="mt-0.5 text-lg">{next.arrivalTime}</dd></div><div><dt className="eyebrow text-[10px]">Dress code</dt><dd className="mt-0.5 text-lg leading-snug">{next.dressCode}</dd></div></dl><div className="mt-5 grid grid-cols-2 gap-3"><a href={mapsUrl(next.mapQuery)} target="_blank" rel="noreferrer" className="btn-primary">Directions</a><Link to={`/schedule/${next.slug}`} className="btn-ghost">Details</Link></div></article></Reveal> : null}
     <footer className="flex flex-col items-center gap-2 text-center"><Monogram className="h-20 w-20 object-contain" sizes="80px" alt="" /><p className="font-script text-4xl text-maroon">Anmol &amp; Tejas</p><p className="eyebrow">{couple.dateLabel}</p><p className="font-serif italic text-muted">{couple.place}</p></footer>
   </div></section>;
 }
