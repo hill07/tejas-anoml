@@ -4,6 +4,7 @@ import { GoldCorners, OrnamentDivider } from '../components/Ornaments';
 import { ArrowLeftIcon, MapPinIcon } from '../components/Icons';
 import { events, invitedLabels } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
+import NotFound from './NotFound';
 
 const GOOGLE_MAPS_DIRECTIONS = 'https://share.google/U9CajawgRXsCraFFy';
 
