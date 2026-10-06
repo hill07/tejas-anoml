@@ -2,9 +2,10 @@ import { Link, useParams } from 'react-router-dom';
 import { Page } from '../components/Layout';
 import { GoldCorners, OrnamentDivider } from '../components/Ornaments';
 import { ArrowLeftIcon, MapPinIcon } from '../components/Icons';
-import { events, invitedLabels, mapsUrl } from '../data/wedding';
+import { events, invitedLabels } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
-import NotFound from './NotFound';
+
+const GOOGLE_MAPS_DIRECTIONS = 'https://share.google/U9CajawgRXsCraFFy';
 
 function Fact({ label, value }: { label: string; value: string }) {
   return (
@@ -60,7 +61,7 @@ export default function EventDetail() {
           <MapPinIcon size={18} className="mt-1 shrink-0 text-gold" />
           {event.address}
         </p>
-        <a href={mapsUrl(event.mapQuery)} target="_blank" rel="noreferrer" className="btn-primary mt-5 w-full">
+        <a href={GOOGLE_MAPS_DIRECTIONS} target="_blank" rel="noreferrer" className="btn-primary mt-5 w-full">
           Map &amp; directions
         </a>
       </section>
