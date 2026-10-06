@@ -61,7 +61,6 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
         </svg>
       )}
 
-
       {theme.sparkle
         ? SPARKS.map((s, i) => (
             <span
@@ -95,7 +94,7 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
       {/* Centered event lettering, with no panel, shadow, or photo overlay. */}
       <div
         key={String(active)}
-        className={`absolute inset-x-[5%] z-10 px-[3%] text-center ${event.slug === 'welcome-party' ? 'top-[7%]' : event.slug === 'wedding' ? 'top-[29%]' : 'top-1/2 -translate-y-1/2'}`}
+        className={`absolute inset-x-[5%] z-10 px-[3%] text-center ${event.slug === 'welcome-party' ? 'top-[7%]' : event.slug === 'wedding' ? 'top-[26%]' : 'top-1/2 -translate-y-1/2'}`}
         style={{
           color: event.slug === 'reception' ? '#fff4df' : '#54202b',
         }}
