@@ -39,25 +39,6 @@ export interface WeddingEvent {
 
 const eventList: WeddingEvent[] = [
   {
-    slug: 'haldi',
-    name: 'Haldi',
-    subtitle: 'Haldi ceremony',
-    date: '2027-07-01',
-    dateLabel: 'Thursday 1 July 2027',
-    startTime: '08:30',
-    arrivalTime: '08:30',
-    finishTime: '12:00',
-    venue: 'Agliolio',
-    address: 'Agliolio',
-    mapQuery: 'Agliolio',
-    dressCode: 'Yellow or festive attire',
-    colours: 'Yellow',
-    setting: 'To be confirmed',
-    food: 'Details to be confirmed',
-    notes: 'Haldi begins at 8:30 am onwards.',
-    invited: 'all',
-  },
-  {
     slug: 'wedding',
     name: 'Wedding',
     subtitle: 'Wedding celebration',
