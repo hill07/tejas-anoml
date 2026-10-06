@@ -94,7 +94,7 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
       {/* Event lettering. */}
       <div
         key={String(active)}
-        className={`absolute inset-x-[5%] z-10 px-[3%] text-center ${event.slug === 'welcome-party' ? 'top-[7%]' : event.slug === 'wedding' ? 'top-[24%]' : 'top-1/2 -translate-y-1/2'}`}
+        className={`absolute inset-x-[5%] z-10 px-[3%] text-center ${event.slug === 'welcome-party' ? 'top-[7%]' : event.slug === 'wedding' ? 'top-[20%]' : 'top-1/2 -translate-y-1/2'}`}
         style={{
           color: event.slug === 'reception' ? '#fff4df' : '#54202b',
         }}
