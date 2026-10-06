@@ -378,10 +378,6 @@ export const story = [
     title: 'How we met',
     body: "A quick add on Snapchat — that's genuinely where it started. Tejas appeared in Anmol's quick add, Anmol sent a happy birthday message, and the replies never really stopped.",
   },
-  {
-    title: 'Why Malta',
-    body: 'Malta is the perfect place for an Indian wedding. The Mediterranean ocean, the golden old cities, the summer sun — we couldn\'t imagine our families anywhere else.',
-  },
 ];
 
 export const galleryNote = 'Photos will appear here after the celebrations. Share yours with #TejMolWedding.';
