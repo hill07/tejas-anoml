@@ -3,10 +3,12 @@ import { Page, PageHeader } from '../components/Layout';
 import { SectionRule } from '../components/Ornaments';
 import { Reveal } from '../components/Reveal';
 import { BusIcon, ExternalIcon, HotelIcon, PlaneIcon } from '../components/Icons';
-import { events, mapsUrl, travel } from '../data/wedding';
+import { events, travel } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 import mdina640 from '../assets/malta-mdina-640.webp';
 import mdina1280 from '../assets/malta-mdina-1280.webp';
+
+const GOOGLE_MAPS_DIRECTIONS = 'https://share.google/U9CajawgRXsCraFFy';
 
 // Switch a section back on by changing false to true.
 const SHOW_WHERE_TO_STAY: boolean = false;
@@ -21,9 +23,9 @@ function Section({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-function DirectionsLink({ query, children = 'Directions' }: { query: string; children?: ReactNode }) {
+function DirectionsLink({ children = 'Directions' }: { children?: ReactNode }) {
   return (
-    <a href={mapsUrl(query)} target="_blank" rel="noreferrer" className="link-gold inline-flex items-center gap-1">
+    <a href={GOOGLE_MAPS_DIRECTIONS} target="_blank" rel="noreferrer" className="link-gold inline-flex items-center gap-1">
       {children} <ExternalIcon size={12} />
     </a>
   );
@@ -64,7 +66,7 @@ export default function Travel() {
               <p className="mt-1 text-lg leading-relaxed text-muted">{travel.airport.detail}</p>
             </div>
           </div>
-          <a href={mapsUrl(travel.airport.mapQuery)} target="_blank" rel="noreferrer" className="btn-primary mt-5 w-full">
+          <a href={GOOGLE_MAPS_DIRECTIONS} target="_blank" rel="noreferrer" className="btn-primary mt-5 w-full">
             Airport directions
           </a>
         </Reveal>
@@ -110,7 +112,7 @@ export default function Travel() {
             </div>
             <p className="mt-2 text-lg leading-relaxed text-muted">{h.detail}</p>
             <div className="mt-3">
-              <DirectionsLink query={h.mapQuery} />
+              <DirectionsLink />
             </div>
           </Reveal>
         ))}
@@ -156,7 +158,7 @@ export default function Travel() {
           {venues.map((e) => (
             <a
               key={e.venue}
-              href={mapsUrl(e.mapQuery)}
+              href={GOOGLE_MAPS_DIRECTIONS}
               target="_blank"
               rel="noreferrer"
               className="card-link flex items-center justify-between gap-3 p-4"
