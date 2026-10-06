@@ -44,6 +44,7 @@ function Hero() {
         <p className="font-serif text-xs italic leading-relaxed text-maroon-deep sm:text-sm">First With loving memory of</p>
         <p className="mt-1 font-serif text-xs font-bold leading-relaxed text-maroon-deep sm:text-sm">Late Mr Jitendra Brahmbhatt<br />Late Mrs Ramila Brahmbhatt<br />Late Mr Jaimeen Brahmbhatt</p>
         <p className="mt-2 font-serif text-xs italic leading-relaxed text-maroon-deep sm:text-sm">Joyfully invite you to celebrate the union of their daughter</p>
+        <p className="mt-1 font-serif text-xs italic leading-relaxed text-maroon-deep sm:text-sm">Daughter of Mrs Karuna Brahmbhatt &amp; Mr Prashant Brahmbhatt</p>
       </div>
       <div className="mt-5 flex animate-rise flex-col items-center gap-1.5 [animation-delay:.55s]">
         <p className="font-heading text-xl tracking-[0.24em] text-maroon-deep sm:text-2xl">PRESS THE LOGO</p>
