@@ -270,37 +270,63 @@ export default function Rsvp() {
           )}
 
           {current === 'events' && (
-            <fieldset className="animate-rise">
-              <legend className="eyebrow">Which events</legend>
-              <div className="mt-3 space-y-2">
-                {events.map((e) => {
-                  const checked = reply.events.includes(e.slug);
-                  return (
-                    <label
-                      key={e.slug}
-                      className={`flex cursor-pointer items-center gap-3 rounded-xl p-3 transition ${
-                        checked ? 'bg-white/80 shadow-[0_0_0_1px_hsl(var(--gold)/0.6)]' : 'bg-white/40'
-                      }`}
-                    >
-                      <input
-                        type="checkbox"
-                        name="events"
-                        value={e.slug}
-                        checked={checked}
-                        onChange={() => toggleEvent(e.slug)}
-                        className="h-4 w-4 shrink-0 accent-[hsl(348_70%_16%)]"
-                      />
-                      <span>
-                        <span className="block font-heading text-base text-maroon-deep">{e.name}</span>
-                        <span className="block text-sm italic text-muted">
-                          {e.dateLabel} · {e.startTime}
+            <div className="animate-rise space-y-6">
+              <fieldset>
+                <legend className="eyebrow">Which events</legend>
+                <p className="mt-2 text-base italic leading-relaxed text-muted">
+                  Please select every event you plan to attend. You can choose one event, several, or all of them.
+                </p>
+                <div className="mt-4 space-y-3">
+                  {events.map((e) => {
+                    const checked = reply.events.includes(e.slug);
+                    return (
+                      <label
+                        key={e.slug}
+                        className={`flex cursor-pointer items-center gap-3 rounded-2xl p-4 transition ${
+                          checked
+                            ? 'bg-maroon-deep text-ivory shadow-[0_0_0_1px_hsl(var(--gold-light)/0.7)]'
+                            : 'bg-white/50 text-ink shadow-[0_0_0_1px_hsl(var(--gold)/0.4)] hover:bg-white/80'
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          name="events"
+                          value={e.slug}
+                          checked={checked}
+                          onChange={() => toggleEvent(e.slug)}
+                          className="sr-only"
+                        />
+                        <span
+                          className={`grid h-5 w-5 shrink-0 place-items-center rounded-full border ${
+                            checked ? 'border-gold-light' : 'border-gold'
+                          }`}
+                          aria-hidden="true"
+                        >
+                          {checked ? <span className="h-2.5 w-2.5 rounded-full bg-gold-light" /> : null}
                         </span>
-                      </span>
-                    </label>
-                  );
-                })}
+                        <span className="min-w-0">
+                          <span className="block font-heading text-base">{e.name}</span>
+                          <span className={`block text-sm italic ${
+                            checked ? 'text-ivory/80' : 'text-muted'
+                          }`}>
+                            {e.dateLabel} · {e.startTime}
+                          </span>
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </fieldset>
+
+              <div className="rounded-2xl bg-[hsl(var(--ivory-deep)/0.55)] p-4">
+                <p className="field-label">Selected events</p>
+                <p className="mt-1 text-base">
+                  {reply.events.length
+                    ? events.filter((e) => reply.events.includes(e.slug)).map((e) => e.name).join(', ')
+                    : 'No events selected yet'}
+                </p>
               </div>
-            </fieldset>
+            </div>
           )}
 
           {current === 'food' && (
