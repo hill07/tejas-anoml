@@ -24,7 +24,7 @@ const doors: { to: string; label: string; art: DoorArtKind; icon?: string }[] = 
   { to: '/gallery', label: 'Gallery', art: 'gallery' },
   { to: '/rsvp', label: 'RSVP', art: 'rsvp' },
   { to: '/more', label: 'More', art: 'more', icon: '/more.png' },
-  { to: '/things-to-do', label: 'Things to Do', art: 'travel' },
+  { to: '/things-to-do', label: 'Things to Do', art: 'travel',icon: '/thingstodo.png'},
 ];
 
 function Hero() {
