@@ -28,10 +28,10 @@ const doors: { to: string; label: string; art: DoorArtKind; icon?: string }[] = 
 
 function Hero() {
   return (
-    <section className="bg-velvet-taupe relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-6 pb-28 pt-12 text-center">
-      <FloralSpray className="pointer-events-none absolute -left-10 bottom-16 w-44 opacity-70 sm:w-64" />
-      <FloralSpray className="pointer-events-none absolute -right-10 top-10 w-40 rotate-180 opacity-60 sm:w-56" />
-
+    <section
+      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat px-6 pb-28 pt-12 text-center"
+      style={{ backgroundImage: "url('/background.jpeg')" }}
+    >
       <Link
         to="/story"
         aria-label="Read our story"
