@@ -37,7 +37,18 @@ export default function Travel() {
     'Flights to Malta, hotel room blocks, coach timetable, parking, taxis and directions to every venue.',
   );
   // One entry per venue, in schedule order.
-  const venues = Array.from(new Map(events.map((e) => [e.venue, e])).values());
+  const venues = [
+    ...Array.from(new Map(events.map((e) => [e.venue, e])).values()).map((e) => ({
+      venue: e.venue,
+      address: e.address,
+      mapUrl: GOOGLE_MAPS_DIRECTIONS,
+    })),
+    {
+      venue: 'Radisson Blu Resort & Spa, Malta Golden Sands',
+      address: 'Radisson Blu Resort & Spa, Malta Golden Sands',
+      mapUrl: 'https://share.google/cuwXvdo6XaaSmnVMY',
+    },
+  ];
 
   return (
     <Page bg="sky">
@@ -158,7 +169,7 @@ export default function Travel() {
           {venues.map((e) => (
             <a
               key={e.venue}
-              href={GOOGLE_MAPS_DIRECTIONS}
+              href={e.mapUrl}
               target="_blank"
               rel="noreferrer"
               className="card-link flex items-center justify-between gap-3 p-4"
