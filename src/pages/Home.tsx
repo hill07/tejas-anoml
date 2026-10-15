@@ -29,8 +29,7 @@ const doors: { to: string; label: string; art: DoorArtKind; icon?: string }[] = 
 function Hero() {
   return (
     <section
-      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat px-6 pb-28 pt-12 text-center"
-      style={{ backgroundImage: "url('/background.jpeg')" }}
+      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-sky px-6 pb-28 pt-12 text-center"
     >
       <Link to="/story" aria-label="Read our story" className="group relative mb-2 grid place-items-center rounded-full outline-offset-8">
         <span className="absolute -inset-6 animate-breathe rounded-full" style={{ background: 'radial-gradient(circle, hsl(42 80% 80% / .55), hsl(348 60% 85% / .25) 55%, transparent 72%)' }} aria-hidden="true" />
