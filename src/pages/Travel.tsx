@@ -6,7 +6,7 @@ import { BusIcon, ExternalIcon, HotelIcon } from '../components/Icons';
 import { events, travel } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 import mdina640 from '../assets/malta-mdina-640.jpeg';
-import mdina1280 from '../assets/malta-mdina-1280.webp';
+import mdina1280 from '../assets/malta-mdina-640.jpeg';
 
 const GOOGLE_MAPS_DIRECTIONS = 'https://share.google/U9CajawgRXsCraFFy';
 
