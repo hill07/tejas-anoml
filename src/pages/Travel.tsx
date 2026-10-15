@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { Page, PageHeader } from '../components/Layout';
 import { SectionRule } from '../components/Ornaments';
 import { Reveal } from '../components/Reveal';
-import { BusIcon, ExternalIcon, HotelIcon, PlaneIcon } from '../components/Icons';
+import { BusIcon, ExternalIcon } from '../components/Icons';
 import { events, travel } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 import mdina640 from '../assets/malta-mdina-640.jpeg';

@@ -2,7 +2,7 @@ import { GoldFrame } from '../components/GoldFrame';
 import { Page, PageHeader } from '../components/Layout';
 import { SectionRule } from '../components/Ornaments';
 import { Reveal } from '../components/Reveal';
-import { pleaseAvoid, wardrobe, wardrobeIntro, whereToShop, type AttireSlug } from '../data/wedding';
+import { pleaseAvoid, wardrobe, wardrobeIntro, type AttireSlug } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 import mehndi480 from '../assets/attire-mehndi-480.webp';
 import mehndi800 from '../assets/attire-mehndi-800.webp';
