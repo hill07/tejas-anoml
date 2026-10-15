@@ -57,7 +57,7 @@ export default function Travel() {
         />
       </Reveal>
 
-      <Section label="Arriving">
+      {/* <Section label="Arriving">
         <Reveal className="card">
           <div className="flex items-start gap-3">
             <PlaneIcon size={22} className="mt-1 shrink-0 text-gold" />
@@ -78,9 +78,9 @@ export default function Travel() {
           <h2 className="font-heading text-xl text-maroon-deep">{travel.ferry.name}</h2>
           <p className="mt-1 text-lg leading-relaxed text-muted">{travel.ferry.detail}</p>
         </Reveal>
-      </Section>
+      </Section> */}
 
-      <Section label="Flight routes">
+      {/* <Section label="Flight routes">
         {travel.flights.map((f) => (
           <Reveal as="article" key={f.region} className="card">
             <h3 className="font-heading text-2xl text-maroon-deep">{f.region}</h3>
@@ -98,7 +98,7 @@ export default function Travel() {
             ) : null}
           </Reveal>
         ))}
-      </Section>
+      </Section> */}
 
       {SHOW_WHERE_TO_STAY && (<Section label="Where to stay">
         {travel.hotels.map((h) => (
@@ -142,7 +142,7 @@ export default function Travel() {
         </Reveal>
       </Section>)}
 
-      <Section label="Getting around">
+      {/* <Section label="Getting around">
         <Reveal className="card">
           <p className="eyebrow">Taxis &amp; rideshare</p>
           <p className="mt-2 text-lg leading-relaxed">{travel.taxis}</p>
@@ -151,7 +151,7 @@ export default function Travel() {
           <p className="eyebrow">Parking</p>
           <p className="mt-2 text-lg leading-relaxed">{travel.parking}</p>
         </Reveal>
-      </Section>
+      </Section> */}
 
       <Section label="All venues">
         <div className="grid gap-3 sm:grid-cols-2">

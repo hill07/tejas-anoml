@@ -18,7 +18,7 @@ const doors: { to: string; label: string; art: DoorArtKind; icon?: string }[] = 
   { to: '/story', label: 'Our Story', art: 'story', icon: '/ourstory.png' },
   { to: '/schedule', label: 'Wedding Invite', art: 'invite', icon: '/weddinginvite.png' },
   { to: '/wardrobe', label: 'Wardrobe Planner', art: 'wardrobe', icon: '/wardroom.png' },
-  { to: '/travel', label: 'Travel Info', art: 'travel', icon: '/travelinfo.png' },
+  { to: '/travel', label: ' All VENUES', art: 'travel', icon: '/travelinfo.png' },
   { to: '/guide', label: 'Wedding Guide', art: 'guide', icon: '/weddingguide.png' },
   { to: '/gallery', label: 'Gallery', art: 'gallery' },
   { to: '/rsvp', label: 'RSVP', art: 'rsvp' },

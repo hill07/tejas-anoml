@@ -97,10 +97,10 @@ export default function Wardrobe() {
           </Reveal>
         </section>
 
-        <Reveal className="card">
+        {/* <Reveal className="card">
           <p className="eyebrow">Where to shop</p>
           <p className="mt-2 text-lg leading-relaxed">{whereToShop}</p>
-        </Reveal>
+        </Reveal> */}
       </div>
     </Page>
   );
