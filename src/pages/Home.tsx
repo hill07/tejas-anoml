@@ -10,7 +10,7 @@ import { ScratchCard } from '../components/ScratchCard';
 import { couple } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 import mdina640 from '../assets/malta-mdina-640.jpeg';
-import mdina1280 from '../assets/malta-mdina-1280.webp';
+import mdina1280 from '../assets/malta-mdina-1280.jpeg';
 
 const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
