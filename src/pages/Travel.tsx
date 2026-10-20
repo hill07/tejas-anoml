@@ -64,7 +64,7 @@ export default function Travel() {
           height={960}
           loading="lazy"
           decoding="async"
-          className="h-52 w-full object-cover sm:h-72"
+          className="h-52 w-full object-cover object-top sm:h-72"
         />
       </Reveal>
 
