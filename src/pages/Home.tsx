@@ -57,7 +57,6 @@ function SaveTheDate() {
       <div className="relative">
         <img src={mdina1280} srcSet={`${mdina640} 640w, ${mdina1280} 1280w`} sizes="100vw" alt="Mdina, Malta at golden hour" width={1280} height={960} loading="lazy" decoding="async" className="h-[58svh] min-h-[340px] w-full object-cover sm:h-[70vh]" />
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(30_40%_20%/0.25)] via-transparent to-transparent" aria-hidden="true" />
-        <div className="absolute inset-x-0 top-6 flex justify-center"><Monogram className="h-24 w-24 object-contain drop-shadow-[0_6px_14px_rgba(0,0,0,.35)] sm:h-32 sm:w-32" sizes="128px" alt="" /></div>
         <TornEdge className="absolute inset-x-0 -bottom-px" />
       </div>
       <div className="flex flex-col items-center gap-6 px-6 pb-16 pt-2 text-center">
