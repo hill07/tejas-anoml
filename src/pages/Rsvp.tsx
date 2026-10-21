@@ -10,7 +10,9 @@ interface Reply {
   phone: string;
   party: string;
   attending: 'yes' | 'no';
-  /** Headcount per event slug (0 = not attending that event). */
+  /** Event slugs the household plans to attend. */
+  events: string[];
+  /** Headcount per event slug (for selected events only). */
   eventGuests: Record<string, number>;
   diet: string;
   allergies: string;
@@ -24,10 +26,10 @@ function defaultEventGuests(): Record<string, number> {
   return Object.fromEntries(events.map((e) => [e.slug, 1]));
 }
 
-function formatEventSummary(eventGuests: Record<string, number>) {
+function formatEventSummary(selected: string[], eventGuests: Record<string, number>) {
   return events
-    .filter((e) => (eventGuests[e.slug] ?? 0) > 0)
-    .map((e) => `${e.name} (${eventGuests[e.slug]})`)
+    .filter((e) => selected.includes(e.slug))
+    .map((e) => `${e.name} (${eventGuests[e.slug] ?? 1})`)
     .join(', ');
 }
 
@@ -40,6 +42,7 @@ const emptyReply: Reply = {
   phone: '',
   party: '',
   attending: 'yes',
+  events: events.map((e) => e.slug),
   eventGuests: defaultEventGuests(),
   diet: '',
   allergies: '',
@@ -55,13 +58,16 @@ function loadSaved(): Reply | null {
     if (!raw) return null;
     const parsed = JSON.parse(raw) as Partial<Reply> & { events?: string[] };
     const eventGuests = { ...defaultEventGuests(), ...parsed.eventGuests };
+    let selected = parsed.events;
+    if (!selected) {
+      selected = events.filter((e) => (eventGuests[e.slug] ?? 0) > 0).map((e) => e.slug);
+    }
     if (!parsed.eventGuests && parsed.events) {
       for (const e of events) {
         eventGuests[e.slug] = parsed.events.includes(e.slug) ? Math.max(1, eventGuests[e.slug] ?? 0) : 0;
       }
     }
-    const { events: _legacy, ...rest } = parsed;
-    return { ...emptyReply, ...rest, eventGuests };
+    return { ...emptyReply, ...parsed, events: selected, eventGuests };
   } catch {
     return null;
   }
@@ -125,6 +131,8 @@ export default function Rsvp() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle');
   const [sentOnline, setSentOnline] = useState(false);
   const [eventsError, setEventsError] = useState('');
+  /** Lets guests clear the field while typing (backspace) without unchecking the event. */
+  const [guestDrafts, setGuestDrafts] = useState<Record<string, string>>({});
 
   const declining = reply.attending === 'no';
   // Guests who decline skip the event, food and logistics steps.
@@ -133,24 +141,46 @@ export default function Rsvp() {
   const isLast = current === 'fun';
 
   const set = <K extends keyof Reply>(key: K, value: Reply[K]) => setReply((r) => ({ ...r, [key]: value }));
-  const eventCount = (slug: string) => reply.eventGuests[slug] ?? 0;
-  const isEventSelected = (slug: string) => eventCount(slug) > 0;
+  const isEventSelected = (slug: string) => reply.events.includes(slug);
+
+  const guestCountDisplay = (slug: string) =>
+    guestDrafts[slug] ?? String(reply.eventGuests[slug] ?? 1);
+
+  const commitGuestCount = (slug: string) => {
+    const raw = guestDrafts[slug];
+    if (raw === undefined) return;
+    const n = Math.min(99, Math.max(1, parseInt(raw, 10) || 1));
+    setReply((r) => ({ ...r, eventGuests: { ...r.eventGuests, [slug]: n } }));
+    setGuestDrafts((d) => {
+      const { [slug]: _, ...rest } = d;
+      return rest;
+    });
+  };
+
+  const commitAllEventGuests = (): { ok: true; eventGuests: Record<string, number> } | { ok: false } => {
+    const next = { ...reply.eventGuests };
+    for (const slug of reply.events) {
+      const raw = guestDrafts[slug] ?? String(next[slug] ?? '');
+      if (raw === '' || !parseInt(raw, 10)) return { ok: false };
+      next[slug] = Math.min(99, Math.max(1, parseInt(raw, 10)));
+    }
+    return { ok: true, eventGuests: next };
+  };
 
   const toggleEvent = (slug: string) => {
     setEventsError('');
-    setReply((r) => ({
-      ...r,
-      eventGuests: {
-        ...r.eventGuests,
-        [slug]: isEventSelected(slug) ? 0 : Math.max(1, r.eventGuests[slug] ?? 1),
-      },
-    }));
-  };
-
-  const setEventCount = (slug: string, raw: number) => {
-    setEventsError('');
-    const n = Number.isFinite(raw) ? Math.min(99, Math.max(0, Math.floor(raw))) : 0;
-    setReply((r) => ({ ...r, eventGuests: { ...r.eventGuests, [slug]: n } }));
+    setGuestDrafts((d) => {
+      const { [slug]: _, ...rest } = d;
+      return rest;
+    });
+    setReply((r) => {
+      const on = r.events.includes(slug);
+      return {
+        ...r,
+        events: on ? r.events.filter((s) => s !== slug) : [...r.events, slug],
+        eventGuests: { ...r.eventGuests, [slug]: on ? r.eventGuests[slug] : Math.max(1, r.eventGuests[slug] ?? 1) },
+      };
+    });
   };
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
@@ -158,11 +188,17 @@ export default function Rsvp() {
     if (!e.currentTarget.reportValidity()) return;
     if (!isLast) {
       if (current === 'events' && !declining) {
-        const hasAny = events.some((e) => eventCount(e.slug) > 0);
-        if (!hasAny) {
+        if (reply.events.length === 0) {
           setEventsError('Please select at least one event and tell us how many guests are coming.');
           return;
         }
+        const committed = commitAllEventGuests();
+        if (!committed.ok) {
+          setEventsError('Please enter how many guests are coming for each selected event.');
+          return;
+        }
+        setReply((r) => ({ ...r, eventGuests: committed.eventGuests }));
+        setGuestDrafts({});
       }
       setStep((s) => s + 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -170,7 +206,7 @@ export default function Rsvp() {
     }
 
     const clearedGuests = Object.fromEntries(events.map((e) => [e.slug, 0]));
-    const final: Reply = declining ? { ...reply, eventGuests: clearedGuests } : reply;
+    const final: Reply = declining ? { ...reply, events: [], eventGuests: clearedGuests } : reply;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(final));
     } catch {
@@ -185,7 +221,7 @@ export default function Rsvp() {
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
             ...final,
-            events: formatEventSummary(final.eventGuests),
+            events: formatEventSummary(final.events, final.eventGuests),
           }),
         });
         if (!res.ok) throw new Error(String(res.status));
@@ -228,7 +264,7 @@ export default function Rsvp() {
             {saved.attending === 'yes' ? (
               <div>
                 <dt className="field-label inline">Events: </dt>
-                <dd className="inline">{formatEventSummary(saved.eventGuests) || 'None selected'}</dd>
+                <dd className="inline">{formatEventSummary(saved.events, saved.eventGuests) || 'None selected'}</dd>
               </div>
             ) : null}
           </dl>
@@ -323,7 +359,6 @@ export default function Rsvp() {
                 <div className="mt-4 space-y-3">
                   {events.map((e) => {
                     const checked = isEventSelected(e.slug);
-                    const count = eventCount(e.slug);
                     return (
                       <div
                         key={e.slug}
@@ -367,14 +402,18 @@ export default function Rsvp() {
                             </label>
                             <input
                               id={`event-guests-${e.slug}`}
-                              type="number"
-                              min={1}
-                              max={99}
+                              type="text"
                               inputMode="numeric"
+                              autoComplete="off"
                               aria-label={`Number of guests for ${e.name}`}
-                              value={count}
-                              onChange={(ev) => setEventCount(e.slug, ev.target.valueAsNumber)}
-                              className="w-[4.75rem] shrink-0 rounded-xl border-2 border-gold-light bg-ivory px-2 py-2.5 text-center font-serif text-xl font-medium leading-none text-maroon-deep shadow-[inset_0_1px_3px_hsl(var(--maroon-deep)/0.12)] outline-none [appearance:textfield] focus:border-gold-deep focus:ring-2 focus:ring-gold/50 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                              value={guestCountDisplay(e.slug)}
+                              onChange={(ev) => {
+                                setEventsError('');
+                                const v = ev.target.value.replace(/\D/g, '');
+                                setGuestDrafts((d) => ({ ...d, [e.slug]: v }));
+                              }}
+                              onBlur={() => commitGuestCount(e.slug)}
+                              className="w-16 shrink-0 rounded-md border border-gold bg-white px-2 py-1.5 text-center font-serif text-lg text-maroon-deep outline-none focus:border-maroon-deep"
                             />
                           </div>
                         ) : null}
@@ -392,7 +431,9 @@ export default function Rsvp() {
 
               <div className="rounded-2xl bg-[hsl(var(--ivory-deep)/0.55)] p-4">
                 <p className="field-label">Selected events</p>
-                <p className="mt-1 text-base">{formatEventSummary(reply.eventGuests) || 'No events selected yet'}</p>
+                <p className="mt-1 text-base">
+                  {formatEventSummary(reply.events, reply.eventGuests) || 'No events selected yet'}
+                </p>
               </div>
             </div>
           )}
