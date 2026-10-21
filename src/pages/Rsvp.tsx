@@ -10,13 +10,25 @@ interface Reply {
   phone: string;
   party: string;
   attending: 'yes' | 'no';
-  events: string[];
+  /** Headcount per event slug (0 = not attending that event). */
+  eventGuests: Record<string, number>;
   diet: string;
   allergies: string;
   hotel: string;
   transport: 'yes' | 'no';
   song: string;
   notes: string;
+}
+
+function defaultEventGuests(): Record<string, number> {
+  return Object.fromEntries(events.map((e) => [e.slug, 1]));
+}
+
+function formatEventSummary(eventGuests: Record<string, number>) {
+  return events
+    .filter((e) => (eventGuests[e.slug] ?? 0) > 0)
+    .map((e) => `${e.name} (${eventGuests[e.slug]})`)
+    .join(', ');
 }
 
 const STORAGE_KEY = 'at-rsvp-reply';
@@ -28,7 +40,7 @@ const emptyReply: Reply = {
   phone: '',
   party: '',
   attending: 'yes',
-  events: events.map((e) => e.slug),
+  eventGuests: defaultEventGuests(),
   diet: '',
   allergies: '',
   hotel: '',
@@ -40,7 +52,16 @@ const emptyReply: Reply = {
 function loadSaved(): Reply | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? { ...emptyReply, ...JSON.parse(raw) } : null;
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Partial<Reply> & { events?: string[] };
+    const eventGuests = { ...defaultEventGuests(), ...parsed.eventGuests };
+    if (!parsed.eventGuests && parsed.events) {
+      for (const e of events) {
+        eventGuests[e.slug] = parsed.events.includes(e.slug) ? Math.max(1, eventGuests[e.slug] ?? 0) : 0;
+      }
+    }
+    const { events: _legacy, ...rest } = parsed;
+    return { ...emptyReply, ...rest, eventGuests };
   } catch {
     return null;
   }
@@ -103,6 +124,7 @@ export default function Rsvp() {
   const [step, setStep] = useState(0);
   const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle');
   const [sentOnline, setSentOnline] = useState(false);
+  const [eventsError, setEventsError] = useState('');
 
   const declining = reply.attending === 'no';
   // Guests who decline skip the event, food and logistics steps.
@@ -111,19 +133,44 @@ export default function Rsvp() {
   const isLast = current === 'fun';
 
   const set = <K extends keyof Reply>(key: K, value: Reply[K]) => setReply((r) => ({ ...r, [key]: value }));
-  const toggleEvent = (slug: string) =>
-    set('events', reply.events.includes(slug) ? reply.events.filter((s) => s !== slug) : [...reply.events, slug]);
+  const eventCount = (slug: string) => reply.eventGuests[slug] ?? 0;
+  const isEventSelected = (slug: string) => eventCount(slug) > 0;
+
+  const toggleEvent = (slug: string) => {
+    setEventsError('');
+    setReply((r) => ({
+      ...r,
+      eventGuests: {
+        ...r.eventGuests,
+        [slug]: isEventSelected(slug) ? 0 : Math.max(1, r.eventGuests[slug] ?? 1),
+      },
+    }));
+  };
+
+  const setEventCount = (slug: string, raw: number) => {
+    setEventsError('');
+    const n = Number.isFinite(raw) ? Math.min(99, Math.max(0, Math.floor(raw))) : 0;
+    setReply((r) => ({ ...r, eventGuests: { ...r.eventGuests, [slug]: n } }));
+  };
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!e.currentTarget.reportValidity()) return;
     if (!isLast) {
+      if (current === 'events' && !declining) {
+        const hasAny = events.some((e) => eventCount(e.slug) > 0);
+        if (!hasAny) {
+          setEventsError('Please select at least one event and tell us how many guests are coming.');
+          return;
+        }
+      }
       setStep((s) => s + 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
-    const final: Reply = declining ? { ...reply, events: [] } : reply;
+    const clearedGuests = Object.fromEntries(events.map((e) => [e.slug, 0]));
+    const final: Reply = declining ? { ...reply, eventGuests: clearedGuests } : reply;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(final));
     } catch {
@@ -138,7 +185,7 @@ export default function Rsvp() {
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
             ...final,
-            events: final.events.map((slug) => events.find((ev) => ev.slug === slug)?.name ?? slug).join(', '),
+            events: formatEventSummary(final.eventGuests),
           }),
         });
         if (!res.ok) throw new Error(String(res.status));
@@ -181,11 +228,7 @@ export default function Rsvp() {
             {saved.attending === 'yes' ? (
               <div>
                 <dt className="field-label inline">Events: </dt>
-                <dd className="inline">
-                  {saved.events.length
-                    ? events.filter((e) => saved.events.includes(e.slug)).map((e) => e.name).join(', ')
-                    : 'None selected'}
-                </dd>
+                <dd className="inline">{formatEventSummary(saved.eventGuests) || 'None selected'}</dd>
               </div>
             ) : null}
           </dl>
@@ -274,57 +317,76 @@ export default function Rsvp() {
               <fieldset>
                 <legend className="eyebrow">Which events</legend>
                 <p className="mt-2 text-base italic leading-relaxed text-muted">
-                  Please select every event you plan to attend. You can choose one event, several, or all of them.
+                  Select each event you plan to attend and tell us how many guests from your household are coming to that
+                  event.
                 </p>
                 <div className="mt-4 space-y-3">
                   {events.map((e) => {
-                    const checked = reply.events.includes(e.slug);
+                    const checked = isEventSelected(e.slug);
+                    const count = eventCount(e.slug);
                     return (
-                      <label
+                      <div
                         key={e.slug}
-                        className={`flex cursor-pointer items-center gap-3 rounded-2xl p-4 transition ${
+                        className={`rounded-2xl p-4 transition ${
                           checked
                             ? 'bg-maroon-deep text-ivory shadow-[0_0_0_1px_hsl(var(--gold-light)/0.7)]'
-                            : 'bg-white/50 text-ink shadow-[0_0_0_1px_hsl(var(--gold)/0.4)] hover:bg-white/80'
+                            : 'bg-white/50 text-ink shadow-[0_0_0_1px_hsl(var(--gold)/0.4)]'
                         }`}
                       >
-                        <input
-                          type="checkbox"
-                          name="events"
-                          value={e.slug}
-                          checked={checked}
-                          onChange={() => toggleEvent(e.slug)}
-                          className="sr-only"
-                        />
-                        <span
-                          className={`grid h-5 w-5 shrink-0 place-items-center rounded-full border ${
-                            checked ? 'border-gold-light' : 'border-gold'
-                          }`}
-                          aria-hidden="true"
-                        >
-                          {checked ? <span className="h-2.5 w-2.5 rounded-full bg-gold-light" /> : null}
-                        </span>
-                        <span className="min-w-0">
-                          <span className="block font-heading text-base">{e.name}</span>
-                          <span className={`block text-sm italic ${
-                            checked ? 'text-ivory/80' : 'text-muted'
-                          }`}>
-                            {e.dateLabel} · {e.startTime}
+                        <label className="flex cursor-pointer items-center gap-3">
+                          <input
+                            type="checkbox"
+                            name="events"
+                            value={e.slug}
+                            checked={checked}
+                            onChange={() => toggleEvent(e.slug)}
+                            className="sr-only"
+                          />
+                          <span
+                            className={`grid h-5 w-5 shrink-0 place-items-center rounded-full border ${
+                              checked ? 'border-gold-light' : 'border-gold'
+                            }`}
+                            aria-hidden="true"
+                          >
+                            {checked ? <span className="h-2.5 w-2.5 rounded-full bg-gold-light" /> : null}
                           </span>
-                        </span>
-                      </label>
+                          <span className="min-w-0 flex-1">
+                            <span className="block font-heading text-base">{e.name}</span>
+                            <span className={`block text-sm italic ${checked ? 'text-ivory/80' : 'text-muted'}`}>
+                              {e.dateLabel} · {e.startTime}
+                            </span>
+                          </span>
+                        </label>
+                        {checked ? (
+                          <div className="mt-3 flex items-center justify-between gap-3 border-t border-[hsl(var(--gold-light)/0.35)] pt-3">
+                            <span className="text-sm italic">Guests attending this event</span>
+                            <input
+                              type="number"
+                              min={1}
+                              max={99}
+                              inputMode="numeric"
+                              aria-label={`Number of guests for ${e.name}`}
+                              value={count}
+                              onChange={(ev) => setEventCount(e.slug, ev.target.valueAsNumber)}
+                              className="field w-20 py-2 text-center text-base not-italic text-ink"
+                            />
+                          </div>
+                        ) : null}
+                      </div>
                     );
                   })}
                 </div>
               </fieldset>
 
+              {eventsError ? (
+                <p role="alert" className="rounded-xl bg-[hsl(0_70%_95%)] p-3 text-base text-[hsl(0_60%_35%)]">
+                  {eventsError}
+                </p>
+              ) : null}
+
               <div className="rounded-2xl bg-[hsl(var(--ivory-deep)/0.55)] p-4">
                 <p className="field-label">Selected events</p>
-                <p className="mt-1 text-base">
-                  {reply.events.length
-                    ? events.filter((e) => reply.events.includes(e.slug)).map((e) => e.name).join(', ')
-                    : 'No events selected yet'}
-                </p>
+                <p className="mt-1 text-base">{formatEventSummary(reply.eventGuests) || 'No events selected yet'}</p>
               </div>
             </div>
           )}
