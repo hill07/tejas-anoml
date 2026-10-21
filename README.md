@@ -24,25 +24,7 @@ Photos live in `assets-src/`; after replacing one, run `npm run optimize-images`
 
 ## RSVP replies
 
-With no configuration, a submitted RSVP is saved in the guest's own browser only — it does **not** reach you.
-
-Set `VITE_RSVP_ENDPOINT` at build time (or in your host's env) to POST each reply as JSON. The payload includes **`eventAttendance`** (every event with `guestCount`) and **`guestCountBySlug`** for spreadsheets.
-
-**Google Sheets:** paste `scripts/google-sheet-rsvp.gs` into Apps Script, set your spreadsheet ID, deploy as a web app (Anyone), then:
-
-Production builds read `VITE_RSVP_ENDPOINT` from `.env.production` (Google Apps Script **web app** URL ending in `/exec`).
-
-Override on the host if needed:
-
-```bash
-VITE_RSVP_ENDPOINT=https://script.google.com/macros/s/…/exec npm run build
-```
-
-**Not** the script *library* link (`/macros/library/...`) — only `/macros/s/.../exec`.
-
-In Apps Script: **Deploy → Web app → Who has access: Anyone**. If opening the `/exec` URL in a browser shows Google sign-in, redeploy with **Anyone** or RSVPs from the site will not reach the sheet.
-
-Other backends (e.g. Formspree) can use the same JSON body.
+Submitted RSVPs are saved in the guest's browser (`localStorage`) on that device only.
 
 ## Deploy
 
