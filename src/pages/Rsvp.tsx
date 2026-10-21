@@ -359,8 +359,14 @@ export default function Rsvp() {
                         </label>
                         {checked ? (
                           <div className="mt-3 flex items-center justify-between gap-3 border-t border-[hsl(var(--gold-light)/0.35)] pt-3">
-                            <span className="text-sm italic">Guests attending this event</span>
+                            <label
+                              htmlFor={`event-guests-${e.slug}`}
+                              className={`text-sm italic ${checked ? 'text-ivory/90' : 'text-muted'}`}
+                            >
+                              Guests attending this event
+                            </label>
                             <input
+                              id={`event-guests-${e.slug}`}
                               type="number"
                               min={1}
                               max={99}
@@ -368,7 +374,7 @@ export default function Rsvp() {
                               aria-label={`Number of guests for ${e.name}`}
                               value={count}
                               onChange={(ev) => setEventCount(e.slug, ev.target.valueAsNumber)}
-                              className="field w-20 py-2 text-center text-base not-italic text-ink"
+                              className="w-[4.75rem] shrink-0 rounded-xl border-2 border-gold-light bg-ivory px-2 py-2.5 text-center font-serif text-xl font-medium leading-none text-maroon-deep shadow-[inset_0_1px_3px_hsl(var(--maroon-deep)/0.12)] outline-none [appearance:textfield] focus:border-gold-deep focus:ring-2 focus:ring-gold/50 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                             />
                           </div>
                         ) : null}
