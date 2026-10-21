@@ -7,10 +7,16 @@
  */
 
 const SPREADSHEET_ID = 'PASTE_SPREADSHEET_ID';
-const SHEET_NAME = 'RSVP';
+const SHEET_NAME = 'Sheet1';
 
 /** Must match event slugs in src/data/wedding.ts (order = sheet columns). */
 const EVENT_SLUGS = ['welcome-party', 'haldi', 'wedding', 'reception'];
+const EVENT_GUEST_HEADERS = [
+  'Guests — Mehndi / Welcome',
+  'Guests — Haldi',
+  'Guests — Wedding',
+  'Guests — Reception',
+];
 
 function sheet() {
   return SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_NAME);
@@ -19,9 +25,7 @@ function sheet() {
 function ensureHeaderRow() {
   const sh = sheet();
   if (sh.getLastRow() > 0) return;
-  const eventHeaders = EVENT_SLUGS.map(function (slug) {
-    return 'Guests — ' + slug;
-  });
+  const eventHeaders = EVENT_GUEST_HEADERS;
   sh.appendRow(
     [
       'Submitted at',
