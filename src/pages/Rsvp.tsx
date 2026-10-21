@@ -2,6 +2,7 @@ import { useState, type FormEvent, type ReactNode } from 'react';
 import { Page } from '../components/Layout';
 import { GoldCorners, OrnamentDivider, SectionRule } from '../components/Ornaments';
 import { events } from '../data/wedding';
+import { sendRsvpToSheet } from '../lib/rsvpSheet';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 interface Reply {
@@ -128,6 +129,7 @@ export default function Rsvp() {
   const [editing, setEditing] = useState(!saved);
   const [step, setStep] = useState(0);
   const [eventsError, setEventsError] = useState('');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle');
   /** Lets guests clear the field while typing (backspace) without unchecking the event. */
   const [guestDrafts, setGuestDrafts] = useState<Record<string, string>>({});
 
@@ -180,7 +182,7 @@ export default function Rsvp() {
     });
   };
 
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!e.currentTarget.reportValidity()) return;
     if (!isLast) {
@@ -214,12 +216,26 @@ export default function Rsvp() {
       final = { ...final, eventGuests: committed.eventGuests };
       setGuestDrafts({});
     }
+    setStatus('sending');
+    try {
+      await sendRsvpToSheet(final);
+    } catch {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(final));
+      } catch {
+        /* storage unavailable */
+      }
+      setStatus('error');
+      return;
+    }
+
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(final));
     } catch {
-      /* storage unavailable — still continue */
+      /* storage unavailable — the sheet already has the reply */
     }
 
+    setStatus('idle');
     setSaved(final);
     setEditing(false);
     setStep(0);
@@ -235,8 +251,8 @@ export default function Rsvp() {
           <h1 className="mt-1 font-heading text-3xl uppercase tracking-[0.16em] text-maroon-deep">We've got it</h1>
           <OrnamentDivider className="mt-3" />
           <p className="mt-5 text-lg leading-relaxed">
-            Your reply has been saved on this device. We&apos;ll be in touch with the final details closer to the time —
-            and if anything changes, just call Priya.
+            Your reply has been sent and saved on this device. We&apos;ll be in touch with the final details closer to the
+            time — and if anything changes, just call Priya.
           </p>
           <dl className="mt-6 space-y-2 rounded-xl bg-[hsl(var(--ivory-deep)/0.5)] p-4 text-left text-base">
             <div>
@@ -498,14 +514,20 @@ export default function Rsvp() {
             </div>
           )}
 
+          {status === 'error' ? (
+            <p role="alert" className="rounded-xl bg-[hsl(0_70%_95%)] p-3 text-base text-[hsl(0_60%_35%)]">
+              We couldn&apos;t send your reply just now. Please try again, or call Priya on +356 7900 1122.
+            </p>
+          ) : null}
+
           <div className="flex gap-3 pt-2">
             {step > 0 ? (
               <button type="button" onClick={() => setStep((s) => s - 1)} className="btn-ghost flex-1">
                 Back
               </button>
             ) : null}
-            <button type="submit" className="btn-primary flex-[2] py-4">
-              {isLast ? 'Send our reply' : 'Continue'}
+            <button type="submit" disabled={status === 'sending'} className="btn-primary flex-[2] py-4 disabled:opacity-60">
+              {isLast ? (status === 'sending' ? 'Sending…' : 'Send our reply') : 'Continue'}
             </button>
           </div>
         </form>

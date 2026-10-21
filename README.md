@@ -24,7 +24,7 @@ Photos live in `assets-src/`; after replacing one, run `npm run optimize-images`
 
 ## RSVP replies
 
-Submitted RSVPs are saved in the guest's browser (`localStorage`) on that device only.
+Each reply is posted to a Google Sheet. The web app URL lives in `src/lib/rsvpSheet.ts` (`RSVP_SHEET_URL`). The Apps Script to paste into the sheet is `scripts/google-sheet-rsvp.gs`. A copy is also kept in the guest's browser so they can edit it on the same device.
 
 ## Deploy
 
