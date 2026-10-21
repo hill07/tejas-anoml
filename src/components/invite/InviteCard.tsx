@@ -21,7 +21,7 @@ const PETALS = Array.from({ length: 12 }, (_, i) => ({
 }));
 
 const EVENT_BACKGROUNDS: Record<string, string> = {
-  'welcome-party': '/Mehndi.jpeg',
+  'welcome-party': '/mehndi.png',
   haldi: '/Haldi.jpeg',
   wedding: '/Wedding.jpeg',
   reception: '/reception.jpeg',

@@ -39,6 +39,25 @@ export interface WeddingEvent {
 
 const eventList: WeddingEvent[] = [
   {
+    slug: 'welcome-party',
+    name: 'Welcome Party / Mehndi',
+    subtitle: 'Welcome party & mehndi',
+    date: '2027-06-30',
+    dateLabel: 'Wednesday 30 June 2027',
+    startTime: '18:00',
+    arrivalTime: '17:30',
+    finishTime: '23:00',
+    venue: 'Olive Gardens',
+    address: 'Olive Gardens',
+    mapQuery: 'Olive Gardens, Malta',
+    dressCode: 'Festive attire',
+    colours: 'Colourful and festive',
+    setting: 'To be confirmed',
+    food: 'Details to be confirmed',
+    notes: 'Welcome party and mehndi begin at 6:00 pm. Please arrive by 5:30 pm.',
+    invited: 'all',
+  },
+  {
     slug: 'haldi',
     name: 'Haldi',
     subtitle: 'Haldi ceremony',
