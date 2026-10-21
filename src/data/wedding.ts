@@ -340,16 +340,11 @@ export const contacts = [
   { role: 'Transport coordinator', name: 'Joseph Camilleri', phone: '+356 7900 4477', note: 'Coaches, taxis and airport runs.' },
   {
     role: 'Hotel — Radisson Blu Resort & Spa, Malta Golden Sands',
-    name: 'Reception',
+    name: 'Front desk',
     phone: '+356 2356 1000',
-    note: '24-hour front desk — where most guests are staying.',
+    note: '',
   },
-  {
-    role: 'Venue — Radisson Blu Resort & Spa',
-    name: 'Events office',
-    phone: '+356 2356 1000',
-    note: 'Olive Gardens, Agliolio & the ballrooms are all on the resort.',
-  },
+  { role: 'Venue — Radisson Blu Resort & Spa', name: 'Events office', phone: '+356 2356 1000', note: '' },
 ];
 
 export const telHref = (phone: string) => `tel:${phone.replace(/\s/g, '')}`;
