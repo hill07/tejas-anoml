@@ -2,6 +2,7 @@ import { useState, type FormEvent, type ReactNode } from 'react';
 import { Page } from '../components/Layout';
 import { GoldCorners, OrnamentDivider, SectionRule } from '../components/Ornaments';
 import { events } from '../data/wedding';
+import { buildRsvpSubmitPayload, isGoogleAppsScriptEndpoint } from '../lib/rsvpPayload';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 interface Reply {
@@ -206,7 +207,17 @@ export default function Rsvp() {
     }
 
     const clearedGuests = Object.fromEntries(events.map((e) => [e.slug, 0]));
-    const final: Reply = declining ? { ...reply, events: [], eventGuests: clearedGuests } : reply;
+    let final: Reply = declining ? { ...reply, events: [], eventGuests: clearedGuests } : reply;
+    if (!declining) {
+      const committed = commitAllEventGuests();
+      if (!committed.ok) {
+        setEventsError('Please enter how many guests are coming for each selected event.');
+        setStep(steps.indexOf('events'));
+        return;
+      }
+      final = { ...final, eventGuests: committed.eventGuests };
+      setGuestDrafts({});
+    }
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(final));
     } catch {
@@ -215,16 +226,19 @@ export default function Rsvp() {
 
     if (endpoint) {
       setStatus('sending');
+      const payload = buildRsvpSubmitPayload(final);
+      const body = JSON.stringify(payload);
+      const googleScript = isGoogleAppsScriptEndpoint(endpoint);
       try {
         const res = await fetch(endpoint, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({
-            ...final,
-            events: formatEventSummary(final.events, final.eventGuests),
-          }),
+          mode: googleScript ? 'no-cors' : 'cors',
+          headers: googleScript
+            ? { 'Content-Type': 'text/plain;charset=utf-8' }
+            : { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body,
         });
-        if (!res.ok) throw new Error(String(res.status));
+        if (!googleScript && !res.ok) throw new Error(String(res.status));
         setSentOnline(true);
       } catch {
         setStatus('error');

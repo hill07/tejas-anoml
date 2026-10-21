@@ -25,13 +25,16 @@ Photos live in `assets-src/`; after replacing one, run `npm run optimize-images`
 ## RSVP replies
 
 With no configuration, a submitted RSVP is saved in the guest's own browser only — it does **not** reach you.
-To receive replies, create a form endpoint that accepts JSON (e.g. Formspree), then set it at build time:
+
+Set `VITE_RSVP_ENDPOINT` at build time (or in your host's env) to POST each reply as JSON. The payload includes **`eventAttendance`** (every event with `guestCount`) and **`guestCountBySlug`** for spreadsheets.
+
+**Google Sheets:** paste `scripts/google-sheet-rsvp.gs` into Apps Script, set your spreadsheet ID, deploy as a web app (Anyone), then:
 
 ```bash
-VITE_RSVP_ENDPOINT=https://formspree.io/f/your-id npm run build
+VITE_RSVP_ENDPOINT=https://script.google.com/macros/s/…/exec npm run build
 ```
 
-(or add it as an environment variable in your hosting dashboard).
+Other backends (e.g. Formspree) can use the same JSON body.
 
 ## Deploy
 
