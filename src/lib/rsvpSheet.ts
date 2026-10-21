@@ -4,7 +4,8 @@ import { events } from '../data/wedding';
  * Deployed Google Apps Script web app URL (ends in /exec).
  * Paste it here after you deploy the script. No .env variable.
  */
-export const RSVP_SHEET_URL = '';
+export const RSVP_SHEET_URL =
+  'https://script.google.com/macros/s/AKfycbzJUNKO6yzweJzRWnb1iAFZa7NsnZ97n3VNc0N_jf5cF3QFZxY54X7WXKA6iFTUsqrOpw/exec';
 
 export type RsvpReplyCore = {
   name: string;
