@@ -360,7 +360,7 @@ export default function Rsvp() {
                 <input
                   className="field"
                   name="hotel"
-                  placeholder="Corinthia Palace, Hilton, own booking…"
+                  placeholder="Radisson Blu Golden Sands, own booking…"
                   value={reply.hotel}
                   onChange={(e) => set('hotel', e.target.value)}
                 />

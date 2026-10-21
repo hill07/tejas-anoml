@@ -140,18 +140,18 @@ export const wardrobe: { slug: AttireSlug; event: string; guidance: string; deta
     western: 'A bright midi dress, or a linen shirt with chinos.',
   },
   {
-    slug: 'haldi',
-    event: 'Haldi / Pithi',
-    guidance: 'Yellow, orange or light traditional clothing',
-    detail: 'Light cotton only. Turmeric paste gets thrown and it does not wash out — nothing precious.',
-    western: 'A yellow shirt or cotton dress you no longer love.',
-  },
-  {
     slug: 'sangeet',
     event: 'Sangeet',
     guidance: 'Glamorous Indian evening wear',
     detail: 'Embellished sarees, sequinned lehengas, velvet sherwanis, bandhgalas. This is the night to go all out.',
     western: 'Cocktail dress or a dark suit.',
+  },
+  {
+    slug: 'haldi',
+    event: 'Haldi / Pithi',
+    guidance: 'Yellow, orange or light traditional clothing',
+    detail: 'Light cotton only. Turmeric paste gets thrown and it does not wash out — nothing precious.',
+    western: 'A yellow shirt or cotton dress you no longer love.',
   },
   {
     slug: 'ceremony',
@@ -338,8 +338,18 @@ export const contacts = [
   { role: "Anmol's family", name: 'Meera Brahmbhatt', phone: '+44 7700 900145', note: '' },
   { role: "Tejas's family", name: 'Arun Patel', phone: '+44 7700 900288', note: '' },
   { role: 'Transport coordinator', name: 'Joseph Camilleri', phone: '+356 7900 4477', note: 'Coaches, taxis and airport runs.' },
-  { role: 'Hotel — Corinthia Palace', name: 'Front desk', phone: '+356 2144 0301', note: '' },
-  { role: 'Venue — Villa Arrigo', name: 'Events office', phone: '+356 2141 3060', note: '' },
+  {
+    role: 'Hotel — Radisson Blu Resort & Spa, Malta Golden Sands',
+    name: 'Reception',
+    phone: '+356 2356 1000',
+    note: '24-hour front desk — where most guests are staying.',
+  },
+  {
+    role: 'Venue — Radisson Blu Resort & Spa',
+    name: 'Events office',
+    phone: '+356 2356 1000',
+    note: 'Olive Gardens, Agliolio & the ballrooms are all on the resort.',
+  },
 ];
 
 export const telHref = (phone: string) => `tel:${phone.replace(/\s/g, '')}`;

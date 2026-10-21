@@ -36,18 +36,19 @@ export default function Travel() {
     'Travel & Stay in Malta',
     'Flights to Malta, hotel room blocks, coach timetable, parking, taxis and directions to every venue.',
   );
-  // One entry per venue, in schedule order.
+  const radissonVenue = {
+    venue: 'Radisson Blu Resort & Spa, Malta Golden Sands',
+    address: 'Radisson Blu Resort & Spa, Malta Golden Sands',
+    mapUrl: 'https://share.google/cuwXvdo6XaaSmnVMY',
+  };
+  // Radisson first (where guests are staying), then one entry per event venue in schedule order.
   const venues = [
+    radissonVenue,
     ...Array.from(new Map(events.map((e) => [e.venue, e])).values()).map((e) => ({
       venue: e.venue,
       address: e.address,
       mapUrl: GOOGLE_MAPS_DIRECTIONS,
     })),
-    {
-      venue: 'Radisson Blu Resort & Spa, Malta Golden Sands',
-      address: 'Radisson Blu Resort & Spa, Malta Golden Sands',
-      mapUrl: 'https://share.google/cuwXvdo6XaaSmnVMY',
-    },
   ];
 
   return (
