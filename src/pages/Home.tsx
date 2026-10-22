@@ -15,25 +15,28 @@ import mdina1280 from '../assets/malta-mdina-1280.jpeg';
 const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
 const doors: { to: string; label: string; art: DoorArtKind; icon?: string }[] = [
-  { to: '/story', label: 'Our Story', art: 'story', icon: '/ourstory.png' },
-  { to: '/schedule', label: 'Wedding Invite', art: 'invite', icon: '/weddinginvite.png' },
-  { to: '/wardrobe', label: 'Wardrobe Planner', art: 'wardrobe', icon: '/wardroom.png' },
-  { to: '/travel', label: ' All VENUES', art: 'travel', icon: '/travelinfo.png' },
-  { to: '/guide', label: 'Wedding Guide', art: 'guide', icon: '/weddingguide.png' },
+  { to: '/story', label: 'Our Story', art: 'story', icon: '/optimized/ourstory.webp' },
+  { to: '/schedule', label: 'Wedding Invite', art: 'invite', icon: '/optimized/weddinginvite.webp' },
+  { to: '/wardrobe', label: 'Wardrobe Planner', art: 'wardrobe', icon: '/optimized/wardroom.webp' },
+  { to: '/travel', label: ' All VENUES', art: 'travel', icon: '/optimized/travelinfo.webp' },
+  { to: '/guide', label: 'Wedding Guide', art: 'guide', icon: '/optimized/weddingguide.webp' },
   { to: '/gallery', label: 'Gallery', art: 'gallery' },
   { to: '/rsvp', label: 'RSVP', art: 'rsvp' },
-  { to: '/more', label: 'More', art: 'more', icon: '/more.png' },
-  { to: '/things-to-do', label: 'Things to Do', art: 'travel', icon: '/thingstodo.png' },
+  { to: '/more', label: 'More', art: 'more', icon: '/optimized/more.webp' },
+  { to: '/things-to-do', label: 'Things to Do', art: 'travel', icon: '/optimized/thingstodo.webp' },
 ];
 
 function Hero() {
   return (
     <section className="relative bg-paper">
       <img
-        src="/home.jpeg"
+        src="/optimized/home-1080.webp"
+        srcSet="/optimized/home-640.webp 640w, /optimized/home-1080.webp 1080w"
+        sizes="100vw"
         alt="Anmol and Tejas"
         width={1080}
         height={1920}
+        fetchPriority="high"
         decoding="async"
         className="block w-full"
       />

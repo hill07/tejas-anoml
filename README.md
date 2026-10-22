@@ -20,7 +20,7 @@ npm run preview    # serves dist/ at http://localhost:4173
 ## Editing content
 
 All wording, events, venues, hotels, coaches, FAQs and contacts live in `src/data/wedding.ts`.
-Photos live in `assets-src/`; after replacing one, run `npm run optimize-images` to regenerate the WebP files and icons.
+Photos live in `assets-src/`; after replacing one, run `npm run optimize-images` to regenerate the WebP files and icons. The script also regenerates optimized homepage, navigation artwork and invitation images from `assets-src/site-artwork/` into `public/optimized/`. The full-resolution site artwork stays out of the production bundle.
 
 ## RSVP replies
 

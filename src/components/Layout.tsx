@@ -81,8 +81,7 @@ function MusicPlayer() {
     const audio = audioRef.current;
     if (!audio) return;
 
-    // Browsers block audible autoplay until the visitor interacts with the page,
-    // so try once on load and then again on each interaction until it starts.
+    // Wait for a visitor gesture before requesting the audio.
     // Only events that count as a user gesture are used: on touch screens that is
     // the finger lifting (touchend / pointerup / click), not touchstart / pointerdown.
     const gestures = ['click', 'pointerup', 'touchend', 'keydown'] as const;
@@ -98,8 +97,6 @@ function MusicPlayer() {
     // Once it is playing (by any route, including the music button) stop auto-starting,
     // so a visitor who pauses it is not overridden by their next tap.
     audio.addEventListener('playing', stopListening, { once: true });
-    startMusic();
-
     return () => {
       stopListening();
       audio.removeEventListener('playing', stopListening);
@@ -178,7 +175,7 @@ function MusicPlayer() {
           </button>
         </div>
       ) : null}
-      <audio ref={audioRef} src="/music.mp3" loop preload="metadata" onPause={() => setPlaying(false)} onPlay={() => setPlaying(true)} />
+      <audio ref={audioRef} src="/music.mp3" loop preload="none" onPause={() => setPlaying(false)} onPlay={() => setPlaying(true)} />
       <button
         type="button"
         onClick={toggleMusic}

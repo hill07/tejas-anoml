@@ -4,9 +4,12 @@ import sharp from 'sharp';
 import fs from 'node:fs';
 
 const src = 'assets-src';
+const siteArtwork = 'assets-src/site-artwork';
 const out = 'src/assets';
+const publicOptimized = 'public/optimized';
 fs.mkdirSync(out, { recursive: true });
 fs.mkdirSync('public/icons', { recursive: true });
+fs.mkdirSync(publicOptimized, { recursive: true });
 
 const photos = [
   ['malta-mdina.jpg', 'malta-mdina', [640, 1280]],
@@ -43,4 +46,42 @@ await icon(64, 'public/favicon.png', 0.04);
 // Social share image
 const og = await sharp(`${src}/malta-mdina.jpg`).resize(1200, 630, { fit: 'cover' }).jpeg({ quality: 80 }).toBuffer();
 await sharp(og).toFile('public/og-image.jpg');
+
+// Optimize the larger public artwork used by the homepage and event invitations.
+for (const width of [640, 1080]) {
+  await sharp(`${siteArtwork}/home.jpeg`)
+    .resize({ width, withoutEnlargement: true })
+    .webp({ quality: 78 })
+    .toFile(`${publicOptimized}/home-${width}.webp`);
+}
+
+const artwork = [
+  ['ourstory.png', 'ourstory'],
+  ['weddinginvite.png', 'weddinginvite'],
+  ['wardroom.png', 'wardroom'],
+  ['travelinfo.png', 'travelinfo'],
+  ['weddingguide.png', 'weddingguide'],
+  ['more.png', 'more'],
+  ['thingstodo.png', 'thingstodo'],
+];
+for (const [file, name] of artwork) {
+  await sharp(`${siteArtwork}/${file}`)
+    .resize({ width: 640, withoutEnlargement: true })
+    .webp({ quality: 78, alphaQuality: 85 })
+    .toFile(`${publicOptimized}/${name}.webp`);
+}
+
+const invitationPhotos = [
+  ['mehndi.png', 'mehndi'],
+  ['Haldi.jpeg', 'haldi'],
+  ['Wedding.jpeg', 'wedding'],
+  ['reception.jpeg', 'reception'],
+];
+for (const [file, name] of invitationPhotos) {
+  await sharp(`${siteArtwork}/${file}`)
+    .resize({ width: 720, withoutEnlargement: true })
+    .webp({ quality: 78 })
+    .toFile(`${publicOptimized}/${name}.webp`);
+}
+
 console.log('done');
