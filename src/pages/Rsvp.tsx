@@ -17,8 +17,6 @@ interface Reply {
   eventGuests: Record<string, number>;
   diet: string;
   allergies: string;
-  hotel: string;
-  transport: 'yes' | 'no';
   song: string;
   notes: string;
 }
@@ -46,8 +44,6 @@ const emptyReply: Reply = {
   eventGuests: defaultEventGuests(),
   diet: '',
   allergies: '',
-  hotel: '',
-  transport: 'yes',
   song: '',
   notes: '',
 };
@@ -122,7 +118,7 @@ function Choice({
 export default function Rsvp() {
   useDocumentTitle(
     'RSVP',
-    "Confirm which events you're coming to, tell us about dietary requirements, transport and accommodation, and request a song.",
+    "Confirm which events you're coming to, tell us about dietary requirements, and request a song.",
   );
   const [saved, setSaved] = useState<Reply | null>(loadSaved);
   const [reply, setReply] = useState<Reply>(() => saved ?? emptyReply);
@@ -134,8 +130,8 @@ export default function Rsvp() {
   const [guestDrafts, setGuestDrafts] = useState<Record<string, string>>({});
 
   const declining = reply.attending === 'no';
-  // Guests who decline skip the event, food and logistics steps.
-  const steps = declining ? ['who', 'fun'] : ['who', 'events', 'food', 'logistics', 'fun'];
+  // Guests who decline skip the event and food steps.
+  const steps = declining ? ['who', 'fun'] : ['who', 'events', 'food', 'fun'];
   const current = steps[Math.min(step, steps.length - 1)];
   const isLast = current === 'fun';
 
@@ -252,7 +248,7 @@ export default function Rsvp() {
           <OrnamentDivider className="mt-3" />
           <p className="mt-5 text-lg leading-relaxed">
             Your reply has been sent and saved on this device. We&apos;ll be in touch with the final details closer to the
-            time — and if anything changes, just call Priya.
+            time — and if anything changes, just call Sonia (Perfect Wedding).
           </p>
           <dl className="mt-6 space-y-2 rounded-xl bg-[hsl(var(--ivory-deep)/0.5)] p-4 text-left text-base">
             <div>
@@ -464,29 +460,6 @@ export default function Rsvp() {
             </div>
           )}
 
-          {current === 'logistics' && (
-            <div className="animate-rise space-y-5">
-              <p className="eyebrow">Logistics</p>
-              <Field label="Where are you staying?">
-                <input
-                  className="field"
-                  name="hotel"
-                  placeholder="Radisson Blu Golden Sands, own booking…"
-                  value={reply.hotel}
-                  onChange={(e) => set('hotel', e.target.value)}
-                />
-              </Field>
-              <div className="grid gap-2.5 sm:grid-cols-2">
-                <Choice name="transport" checked={reply.transport === 'yes'} onChange={() => set('transport', 'yes')}>
-                  I need the coaches
-                </Choice>
-                <Choice name="transport" checked={reply.transport === 'no'} onChange={() => set('transport', 'no')}>
-                  I'll make my own way
-                </Choice>
-              </div>
-            </div>
-          )}
-
           {current === 'fun' && (
             <div className="animate-rise space-y-5">
               <p className="eyebrow">The fun bit</p>
@@ -516,7 +489,7 @@ export default function Rsvp() {
 
           {status === 'error' ? (
             <p role="alert" className="rounded-xl bg-[hsl(0_70%_95%)] p-3 text-base text-[hsl(0_60%_35%)]">
-              We couldn&apos;t send your reply just now. Please try again, or call Priya on +356 7900 1122.
+              We couldn&apos;t send your reply just now. Please try again, or call Sonia on +356 9975 9614.
             </p>
           ) : null}
 
@@ -536,9 +509,9 @@ export default function Rsvp() {
       <div className="mx-auto mt-10 max-w-lg">
         <SectionRule label="Need a hand?" light />
         <p className="mt-3 text-center text-lg text-ivory/90">
-          Call Priya Menon on{' '}
-          <a href="tel:+35679001122" className="font-semibold text-gold-light underline underline-offset-4">
-            +356 7900 1122
+          Call Sonia (Perfect Wedding) on{' '}
+          <a href="tel:+35699759614" className="font-semibold text-gold-light underline underline-offset-4">
+            +356 9975 9614
           </a>
         </p>
       </div>

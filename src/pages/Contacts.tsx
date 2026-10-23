@@ -5,13 +5,13 @@ import { contacts, telHref } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 export default function Contacts() {
-  useDocumentTitle('Important Contacts', 'Wedding coordinator, family contacts, transport, hotel and venue numbers for our Malta wedding.');
+  useDocumentTitle('Important Contacts', 'Wedding coordinator, family and hotel contacts for our Malta wedding.');
   return (
     <Page>
       <PageHeader
         eyebrow="Who to call"
         title="Contacts"
-        intro="On the wedding day please call Priya rather than us — we'd love to help and we absolutely will not be able to."
+        intro="On the wedding day please call Sonia rather than us — we'd love to help and we absolutely will not be able to."
       />
       <div className="grid gap-4 sm:grid-cols-2">
         {contacts.map((c) => (

@@ -34,7 +34,7 @@ function DirectionsLink({ children = 'Directions' }: { children?: ReactNode }) {
 export default function Travel() {
   useDocumentTitle(
     'Travel & Stay in Malta',
-    'Flights to Malta, hotel room blocks, coach timetable, parking, taxis and directions to every venue.',
+    'Travel information and directions to wedding venues in Malta.',
   );
   const radissonVenue = {
     venue: 'Radisson Blu Resort & Spa, Malta Golden Sands',
@@ -185,16 +185,6 @@ export default function Travel() {
         </div>
       </Section>
 
-      <Reveal className="card mt-8">
-        <p className="eyebrow">Transport problems?</p>
-        <p className="mt-2 text-lg">
-          Call Joseph Camilleri, our transport coordinator, on{' '}
-          <a href="tel:+35679004477" className="font-semibold text-maroon underline underline-offset-4">
-            +356 7900 4477
-          </a>
-          .
-        </p>
-      </Reveal>
     </Page>
   );
 }

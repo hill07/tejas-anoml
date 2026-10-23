@@ -17,8 +17,6 @@ export type RsvpReplyCore = {
   eventGuests: Record<string, number>;
   diet: string;
   allergies: string;
-  hotel: string;
-  transport: 'yes' | 'no';
   song: string;
   notes: string;
 };
@@ -52,8 +50,8 @@ export function buildRsvpSheetRow(reply: RsvpReplyCore) {
     guestsReception: counts.reception ?? 0,
     diet: declining ? '' : reply.diet.trim(),
     allergies: declining ? '' : reply.allergies.trim(),
-    hotel: declining ? '' : reply.hotel.trim(),
-    transport: declining ? '' : reply.transport === 'yes' ? 'Needs the coaches' : 'Own way',
+    hotel: '',
+    transport: '',
     song: declining ? '' : reply.song.trim(),
     notes: reply.notes.trim(),
   };

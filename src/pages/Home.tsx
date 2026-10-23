@@ -64,6 +64,7 @@ function SaveTheDate() {
       </div>
       <div className="flex flex-col items-center gap-6 px-6 pb-16 pt-2 text-center">
         <Reveal as="h2" className="font-script text-5xl leading-tight text-[#901836] sm:text-7xl">Anmol &amp; Tejas</Reveal>
+        <Reveal delay={75} className="font-serif text-base font-semibold tracking-wide text-maroon">#AnmolKaTejas</Reveal>
         <Reveal as="p" delay={150} className="max-w-xs font-serif text-lg italic leading-relaxed text-maroon sm:max-w-md sm:text-xl">{couple.tagline}</Reveal>
         <OrnamentDivider />
         <Reveal delay={250} className="flex w-full flex-col items-center gap-4">

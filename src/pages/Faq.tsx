@@ -4,13 +4,13 @@ import { faq } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 export default function Faq() {
-  useDocumentTitle('Guest FAQ', 'Children, plus-ones, alcohol, photos, parking, transport and what to bring — answered.');
+  useDocumentTitle('Guest FAQ', 'Children, alcohol, photos, parking and what to bring — answered.');
   return (
     <Page>
       <PageHeader
         eyebrow="Guest information"
         title="Good Questions"
-        intro="If yours isn't here, ask Priya — she has the real answers."
+        intro="If yours isn't here, ask Sonia — she has the real answers."
       />
       <div className="space-y-3">
         {faq.map((f, i) => (

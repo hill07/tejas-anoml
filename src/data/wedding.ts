@@ -3,7 +3,7 @@
 export const couple = {
   names: 'Anmol & Tejas',
   shortNames: 'TejMol',
-  hashtag: '#TejMolWedding',
+  hashtag: '#AnmolKaTejas',
   dateLabel: '30 June – 2 July 2027',
   mainDateLabel: 'Thursday 1 July 2027',
   shortDate: '30.06.27 – 02.07.27',
@@ -310,7 +310,7 @@ export const etiquette = [
   'Shoes come off before the mandap and before the puja room. There are racks, and someone to help.',
   'Sit whenever you like during the ceremony — it runs about three hours and people come and go. Please stand for the Jai Mala and the final blessing.',
   'Photos are welcome everywhere except during the pheras, when we ask for phones down.',
-  'Post freely, and tag #TejMolWedding so we see everything.',
+  'Post freely, and tag #AnmolKaTejas so we see everything.',
   "Greeting elders with a slight bow or a 'Namaste' always lands well.",
   "You're warmly invited to join the Baraat dancing, the Jai Mala cheering and the Garba at the Sangeet.",
 ];
@@ -318,33 +318,28 @@ export const etiquette = [
 export const faq = [
   { q: 'What should I wear?', a: 'See the Wardrobe page — guidance and inspiration for every event, including Western alternatives.' },
   { q: "Can I wear Indian clothes if I'm not Indian?", a: "Yes, and we'd love it. Ask us if you need help finding something." },
-  { q: 'Are children invited?', a: "Yes, at every event except the Reception, where there's a supervised kids' room from 19:00." },
-  { q: 'Can I bring a plus-one?', a: "Your invitation lists exactly who's included. If you're unsure, ask Priya, our coordinator." },
+  { q: 'Are children invited?', a: "Yes, at every event there is a supervised kids' room at the wedding venue." },
   { q: 'Will food be provided?', a: 'At every event. Everything is vegetarian, with clearly labelled vegan and nut-free options.' },
   { q: 'Is alcohol being served?', a: 'Full bar at the Welcome Party, Sangeet and Reception. The daytime ceremonies are dry.' },
   { q: 'Can I take photos during the ceremony?', a: "Yes, except during the pheras. We'll let you know when." },
   { q: 'Where should I park?', a: 'Free parking at every venue except Mdina, which is car-free — use the Main Gate car park.' },
-  { q: 'Is transport provided?', a: 'Yes, coaches run between the hotels and every main event. Timetable on the Travel page.' },
   { q: 'What time should I arrive?', a: 'Every event card lists a recommended arrival time, usually 15–30 minutes before the start.' },
   {
     q: 'What should I bring?',
     a: "Sunscreen, a refillable water bottle, comfortable shoes for Mdina's cobbles, and a shawl for the evening breeze.",
   },
-  { q: 'Who do I contact if I need help?', a: 'Priya, our wedding coordinator — please contact her rather than us on the wedding day.' },
+  { q: 'Who do I contact if I need help?', a: 'Sonia (Perfect Wedding), our wedding coordinator — please contact her rather than us on the wedding day.' },
 ];
 
 export const contacts = [
-  { role: 'Wedding coordinator', name: 'Priya Menon', phone: '+356 7900 1122', note: 'Your first call for anything on the day.' },
-  { role: "Anmol's family", name: 'Meera Brahmbhatt', phone: '+44 7700 900145', note: '' },
+  { role: 'Wedding coordinator', name: 'Sonia (Perfect Wedding)', phone: '+356 9975 9614', note: 'Your first call for anything on the day.' },
   { role: "Tejas's family", name: 'Arun Patel', phone: '+44 7700 900288', note: '' },
-  { role: 'Transport coordinator', name: 'Joseph Camilleri', phone: '+356 7900 4477', note: 'Coaches, taxis and airport runs.' },
   {
     role: 'Hotel — Radisson Blu Resort & Spa, Malta Golden Sands',
     name: 'Front desk',
     phone: '+356 2356 1000',
     note: '',
   },
-  { role: 'Venue — Radisson Blu Resort & Spa', name: 'Events office', phone: '+356 2356 1000', note: '' },
 ];
 
 export const telHref = (phone: string) => `tel:${phone.replace(/\s/g, '')}`;
