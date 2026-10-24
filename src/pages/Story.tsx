@@ -6,10 +6,10 @@ import { couple, story } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 export default function Story() {
-  useDocumentTitle('Our Story', 'How Anmol and Tejas met, and why Malta.');
+  useDocumentTitle('Our Story', `How ${couple.namesInProse} met, and why Malta.`);
   return (
     <Page bg="taupe">
-      <PageHeader eyebrow="Anmol & Tejas" title="Our Story" />
+      <PageHeader eyebrow={couple.names} title="Our Story" />
       <div className="flex justify-center">
         <Monogram eager className="h-44 w-44 animate-rock object-contain" sizes="176px" />
       </div>

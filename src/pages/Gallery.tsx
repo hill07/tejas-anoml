@@ -8,7 +8,7 @@ export default function Gallery() {
   useDocumentTitle('Gallery', 'Photos from the wedding celebrations in Malta.');
   return (
     <Page bg="sky">
-      <PageHeader eyebrow="Anmol & Tejas" title="Gallery" />
+      <PageHeader eyebrow={couple.names} title="Gallery" />
       <div className="mx-auto max-w-xs">
         <GoldFrame className="aspect-[4/5]">
           <div className="grid h-full w-full place-items-center p-6 text-center">

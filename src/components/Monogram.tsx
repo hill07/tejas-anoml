@@ -1,8 +1,9 @@
 import mono160 from '../assets/monogram-160.webp';
 import mono480 from '../assets/monogram-480.webp';
+import { couple } from '../data/wedding';
 
-/** The couple's A & T monogram (from the content reference), served responsively. */
-export function Monogram({ className = '', sizes = '160px', alt = 'Anmol and Tejas monogram', eager = false }: {
+/** The couple's monogram (A & T), served responsively. */
+export function Monogram({ className = '', sizes = '160px', alt = `${couple.namesInProse} monogram`, eager = false }: {
   className?: string;
   sizes?: string;
   alt?: string;

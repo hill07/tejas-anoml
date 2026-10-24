@@ -33,7 +33,7 @@ function Hero() {
         src="/optimized/home-1080.webp"
         srcSet="/optimized/home-640.webp 640w, /optimized/home-1080.webp 1080w"
         sizes="100vw"
-        alt="Anmol and Tejas"
+        alt={couple.namesInProse}
         width={1080}
         height={1920}
         fetchPriority="high"
@@ -63,8 +63,8 @@ function SaveTheDate() {
         <TornEdge className="absolute inset-x-0 -bottom-px" />
       </div>
       <div className="flex flex-col items-center gap-6 px-6 pb-16 pt-2 text-center">
-        <Reveal as="h2" className="font-script text-5xl leading-tight text-[#901836] sm:text-7xl">Anmol &amp; Tejas</Reveal>
-        <Reveal delay={75} className="font-serif text-base font-semibold tracking-wide text-maroon">#AnmolKaTejas</Reveal>
+        <Reveal as="h2" className="font-script text-5xl leading-tight text-[#901836] sm:text-7xl">{couple.names}</Reveal>
+        <Reveal delay={75} className="font-serif text-base font-semibold tracking-wide text-maroon">{couple.hashtag}</Reveal>
         <Reveal as="p" delay={150} className="max-w-xs font-serif text-lg italic leading-relaxed text-maroon sm:max-w-md sm:text-xl">{couple.tagline}</Reveal>
         <OrnamentDivider />
         <Reveal delay={250} className="flex w-full flex-col items-center gap-4">
@@ -102,7 +102,7 @@ function StepInside() {
 function Welcome() {
   return <section className="bg-paper px-5 pb-40 pt-14"><div className="mx-auto grid max-w-2xl gap-10">
     <Reveal as="article" className="card px-6 py-10 text-center sm:px-12"><GoldCorners /><SectionRule label="Welcome" /><p className="mt-5 font-serif text-xl leading-relaxed text-ink">{couple.welcome}</p><p className="mt-5 inline-block rounded-full bg-maroon-deep px-4 py-1.5 font-serif text-base font-semibold tracking-wide text-gold-light">{couple.hashtag}</p><p className="mt-5 font-heading text-[11px] uppercase leading-relaxed tracking-[0.18em] text-gold-deep">{couple.families}</p></Reveal>
-    <footer className="flex flex-col items-center gap-2 text-center"><Monogram className="h-20 w-20 object-contain" sizes="80px" alt="" /><p className="font-script text-4xl text-maroon">Anmol &amp; Tejas</p><p className="eyebrow">{couple.dateLabel}</p><p className="font-serif italic text-muted">{couple.place}</p></footer>
+    <footer className="flex flex-col items-center gap-2 text-center"><Monogram className="h-20 w-20 object-contain" sizes="80px" alt="" /><p className="font-script text-4xl text-maroon">{couple.names}</p><p className="eyebrow">{couple.dateLabel}</p><p className="font-serif italic text-muted">{couple.place}</p></footer>
   </div></section>;
 }
 

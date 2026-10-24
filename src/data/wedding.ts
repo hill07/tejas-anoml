@@ -2,7 +2,9 @@
 
 export const couple = {
   names: 'Anmol & Tejas',
-  shortNames: 'TejMol',
+  /** “Anmol and Tejas” in running text (always Anmol first). */
+  namesInProse: 'Anmol and Tejas',
+  shortNames: 'MolTej',
   hashtag: '#AnmolKaTejas',
   dateLabel: '30 June – 2 July 2027',
   mainDateLabel: 'Thursday 1 July 2027',
@@ -14,6 +16,9 @@ export const couple = {
     'With the blessings of our families, we warmly invite you to celebrate the wedding festivities of Anmol and Tejas. We look forward to sharing these special moments with you.',
   families: 'Anmol, daughter of Mr Prashant & Karuna Brahmbhatt, and Tejas, son of Mr HEMANG Bhatt & Late Mrs Neela Bhatt',
 };
+
+export const SITE_TITLE_DATE = '30 June 2027, Malta';
+export const defaultSiteTitle = `${couple.names} — ${SITE_TITLE_DATE}`;
 
 export type Invited = 'all' | 'anmol' | 'tejas';
 
@@ -376,8 +381,9 @@ export const gifts = {
 export const story = [
   {
     title: 'How we met',
-    body: "A quick add on Snapchat — that's genuinely where it started. Tejas appeared in Anmol's quick add, Anmol sent a happy birthday message, and the replies never really stopped.",
+    body:
+      "It started on Snapchat — Anmol found Tejas in her quick add, sent a happy birthday message, and the replies never really stopped.",
   },
 ];
 
-export const galleryNote = 'Photos will appear here after the celebrations. Share yours with #TejMolWedding.';
+export const galleryNote = `Photos will appear here after the celebrations. Share yours with ${couple.hashtag}.`;

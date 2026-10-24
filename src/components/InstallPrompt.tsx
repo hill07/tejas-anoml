@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { couple } from '../data/wedding';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -81,7 +82,7 @@ export function InstallPrompt() {
       >
         <img src="/icons/icon-192.png" alt="" className="h-11 w-11 shrink-0 rounded-xl ring-1 ring-white/70" />
         <div className="min-w-0 flex-1">
-          <p className="font-serif text-[15px] leading-snug text-maroon-deep">Add A &amp; T Forever to your Home Screen</p>
+          <p className="font-serif text-[15px] leading-snug text-maroon-deep">Add {couple.names} to your Home Screen</p>
           {!deferred && iosHint ? (
             <p className="mt-0.5 font-serif text-[13px] italic text-maroon/80">Tap Share, then “Add to Home Screen”</p>
           ) : null}

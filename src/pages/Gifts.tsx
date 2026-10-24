@@ -1,14 +1,14 @@
 import { Page, PageHeader } from '../components/Layout';
 import { GoldCorners, SectionRule } from '../components/Ornaments';
 import { Reveal } from '../components/Reveal';
-import { gifts } from '../data/wedding';
+import { couple, gifts } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 export default function Gifts() {
-  useDocumentTitle('Gifts', 'Gift information from Anmol and Tejas.');
+  useDocumentTitle('Gifts', `Gift information from ${couple.namesInProse}.`);
   return (
     <Page>
-      <PageHeader eyebrow="Anmol & Tejas" title="Gifts" />
+      <PageHeader eyebrow={couple.names} title="Gifts" />
       <Reveal className="card px-6 py-8 text-center sm:px-10">
         <GoldCorners />
         <p className="text-xl leading-relaxed">{gifts.wording}</p>
