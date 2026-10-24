@@ -1,15 +1,14 @@
 import { BellIcon } from '../components/Icons';
-import { Page, PageHeader } from '../components/Layout';
+import { Page } from '../components/Layout';
 import { Reveal } from '../components/Reveal';
-import { couple, updates } from '../data/wedding';
+import { updates } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 export default function Updates() {
   useDocumentTitle('Updates', 'Latest announcements for wedding guests.');
   return (
     <Page>
-      <PageHeader eyebrow={couple.names} title="Updates" />
-      <div className="space-y-4">
+      <div className="space-y-4 pt-4">
         {updates.map((u) => (
           <Reveal
             as="article"
