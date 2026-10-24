@@ -338,7 +338,6 @@ export const faq = [
 
 export const contacts = [
   { role: 'Wedding coordinator', name: 'Sonia (Perfect Wedding)', phone: '+356 9975 9614', note: 'Your first call for anything on the day.' },
-  { role: "Tejas's family", name: 'Arun Patel', phone: '+44 7700 900288', note: '' },
   {
     role: 'Hotel — Radisson Blu Resort & Spa, Malta Golden Sands',
     name: 'Front desk',
