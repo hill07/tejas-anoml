@@ -101,7 +101,7 @@ function StepInside() {
 
 function Welcome() {
   return <section className="bg-paper px-5 pb-40 pt-14"><div className="mx-auto grid max-w-2xl gap-10">
-    <Reveal as="article" className="card px-6 py-10 text-center sm:px-12"><GoldCorners /><SectionRule label="Welcome" /><p className="mt-5 font-serif text-xl leading-relaxed text-ink">{couple.welcome}</p><p className="mt-5 inline-block rounded-full bg-maroon-deep px-4 py-1.5 font-serif text-base font-semibold tracking-wide text-gold-light">{couple.hashtag}</p><p className="mt-5 font-heading text-[11px] uppercase leading-relaxed tracking-[0.18em] text-gold-deep">{couple.families}</p></Reveal>
+    <Reveal as="article" className="card px-6 py-10 text-center sm:px-12"><GoldCorners /><SectionRule label="Welcome" /><p className="mt-5 font-serif text-xl leading-relaxed text-ink">{couple.welcome}</p><p className="mt-5 inline-block rounded-full bg-maroon-deep px-4 py-1.5 font-serif text-base font-semibold tracking-wide text-gold-light">{couple.hashtag}</p><p className="mt-5 font-heading text-[11px] uppercase leading-relaxed tracking-[0.18em] text-gold-deep">{couple.families}</p><div className="mt-5 border-t border-gold/30 pt-4"><p className="font-heading text-[10px] uppercase tracking-[0.18em] text-gold-deep">Hotel booking discount code</p><p className="mt-1 font-serif text-xl font-semibold tracking-[0.16em] text-maroon-deep">ANMTEJ</p></div></Reveal>
     <footer className="flex flex-col items-center gap-2 text-center"><Monogram className="h-20 w-20 object-contain" sizes="80px" alt="" /><p className="font-script text-4xl text-maroon">{couple.names}</p><p className="eyebrow">{couple.dateLabel}</p><p className="font-serif italic text-muted">{couple.place}</p></footer>
   </div></section>;
 }
