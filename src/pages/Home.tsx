@@ -15,7 +15,6 @@ import mdina1280 from '../assets/malta-mdina-1280.jpeg';
 const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
 const doors: { to: string; label: string; art: DoorArtKind; icon?: string }[] = [
-  { to: '/story', label: 'Our Story', art: 'story', icon: '/optimized/ourstory.webp' },
   { to: '/schedule', label: 'Wedding Invite', art: 'invite', icon: '/optimized/weddinginvite.webp' },
   { to: '/wardrobe', label: 'Wardrobe Planner', art: 'wardrobe', icon: '/optimized/wardroom.webp' },
   { to: '/travel', label: ' All VENUES', art: 'travel', icon: '/optimized/travelinfo.webp' },
