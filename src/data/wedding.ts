@@ -344,6 +344,12 @@ export const contacts = [
     phone: '+356 2356 1000',
     note: '',
   },
+  {
+    role: 'Family contact',
+    name: 'Mr. Prashant Brahmbhatt',
+    phone: '+44 7909 649449',
+    note: '',
+  },
 ];
 
 export const telHref = (phone: string) => `tel:${phone.replace(/\s/g, '')}`;
