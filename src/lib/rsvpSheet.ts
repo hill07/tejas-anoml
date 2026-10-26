@@ -50,16 +50,23 @@ export function buildRsvpSheetRow(reply: RsvpReplyCore) {
     guestsReception: counts.reception ?? 0,
     diet: declining ? '' : reply.diet.trim(),
     allergies: declining ? '' : reply.allergies.trim(),
-    hotel: '',
     transport: '',
     song: declining ? '' : reply.song.trim(),
     notes: reply.notes.trim(),
   };
 }
 
+function isValidEmail(value: string) {
+  const email = value.trim();
+  return email.length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 export async function sendRsvpToSheet(reply: RsvpReplyCore) {
   if (!RSVP_SHEET_URL) {
     throw new Error('RSVP sheet URL is not set');
+  }
+  if (!isValidEmail(reply.email)) {
+    throw new Error('Email is required');
   }
   await fetch(RSVP_SHEET_URL, {
     method: 'POST',

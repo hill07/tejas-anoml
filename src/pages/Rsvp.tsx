@@ -34,6 +34,11 @@ function formatEventSummary(selected: string[], eventGuests: Record<string, numb
 
 const STORAGE_KEY = 'at-rsvp-reply';
 
+function isValidEmail(value: string) {
+  const email = value.trim();
+  return email.length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 const emptyReply: Reply = {
   name: '',
   email: '',
@@ -125,6 +130,7 @@ export default function Rsvp() {
   const [editing, setEditing] = useState(!saved);
   const [step, setStep] = useState(0);
   const [eventsError, setEventsError] = useState('');
+  const [whoError, setWhoError] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle');
   /** Lets guests clear the field while typing (backspace) without unchecking the event. */
   const [guestDrafts, setGuestDrafts] = useState<Record<string, string>>({});
@@ -182,6 +188,13 @@ export default function Rsvp() {
     e.preventDefault();
     if (!e.currentTarget.reportValidity()) return;
     if (!isLast) {
+      if (current === 'who') {
+        if (!reply.name.trim() || !isValidEmail(reply.email)) {
+          setWhoError('Please enter your full name and a valid email address.');
+          return;
+        }
+        setWhoError('');
+      }
       if (current === 'events' && !declining) {
         if (reply.events.length === 0) {
           setEventsError('Please select at least one event and tell us how many guests are coming.');
@@ -212,6 +225,13 @@ export default function Rsvp() {
       final = { ...final, eventGuests: committed.eventGuests };
       setGuestDrafts({});
     }
+    if (!final.name.trim() || !isValidEmail(final.email)) {
+      setWhoError('Please enter your full name and a valid email address.');
+      setStep(0);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    setWhoError('');
     setStatus('sending');
     try {
       await sendRsvpToSheet(final);
@@ -309,7 +329,7 @@ export default function Rsvp() {
               <Field label="Your full name">
                 <input className="field" name="name" required autoComplete="name" value={reply.name} onChange={(e) => set('name', e.target.value)} />
               </Field>
-              <Field label="Email">
+              <Field label="Email (required)">
                 <input
                   className="field"
                   name="email"
@@ -317,9 +337,17 @@ export default function Rsvp() {
                   required
                   autoComplete="email"
                   value={reply.email}
-                  onChange={(e) => set('email', e.target.value)}
+                  onChange={(e) => {
+                    setWhoError('');
+                    set('email', e.target.value);
+                  }}
                 />
               </Field>
+              {whoError ? (
+                <p role="alert" className="rounded-xl bg-[hsl(0_70%_95%)] p-3 text-base text-[hsl(0_60%_35%)]">
+                  {whoError}
+                </p>
+              ) : null}
               <Field label="Mobile number">
                 <input className="field" name="phone" type="tel" autoComplete="tel" value={reply.phone} onChange={(e) => set('phone', e.target.value)} />
               </Field>
