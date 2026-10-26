@@ -4,8 +4,9 @@
  * One row per email. Editing an RSVP updates that row (no duplicate rows).
  *
  * Deploy: Extensions → Apps Script, paste, Deploy → Web app (Execute as: Me, Anyone).
- * If your sheet still has a "Hotel" column from an older version, delete that column
- * from row 1 and shift the columns to match HEADERS below.
+ * After code changes: Manage deployments → Edit → New version → Deploy.
+ *
+ * getRange(row, column, numRows, numColumns) — third/fourth args are COUNTS, not end row/col.
  */
 
 const SHEET_NAME = 'Sheet1';
@@ -74,6 +75,7 @@ function rowFromPayload(data, submittedAt) {
   ];
 }
 
+/** Row number (1-based) of first data row matching email, or 0. */
 function findRowByEmail(email) {
   const sh = sheet();
   const lastRow = sh.getLastRow();
@@ -82,7 +84,8 @@ function findRowByEmail(email) {
   const key = normalizeEmail(email);
   if (!key) return 0;
 
-  const emails = sh.getRange(2, EMAIL_COL, lastRow, EMAIL_COL).getValues();
+  const numRows = lastRow - 1;
+  const emails = sh.getRange(2, EMAIL_COL, numRows, 1).getValues();
   for (var i = 0; i < emails.length; i++) {
     if (normalizeEmail(emails[i][0]) === key) return i + 2;
   }
@@ -97,15 +100,15 @@ function upsertRow(data) {
 
   const existingRow = findRowByEmail(email);
   const now = new Date();
+  const values = rowFromPayload(data, now);
 
   if (existingRow > 0) {
     const submittedAt = sh.getRange(existingRow, 1).getValue() || now;
-    const values = rowFromPayload(data, submittedAt);
-    sh.getRange(existingRow, 1, existingRow, values.length).setValues([values]);
+    values[0] = submittedAt;
+    sh.getRange(existingRow, 1, 1, values.length).setValues([values]);
     return { updated: true, row: existingRow };
   }
 
-  const values = rowFromPayload(data, now);
   sh.appendRow(values);
   return { updated: false, row: sh.getLastRow() };
 }
@@ -122,4 +125,42 @@ function doPost(e) {
       ContentService.MimeType.JSON
     );
   }
+}
+
+/** Run once in the editor to verify update-by-email (check Sheet1 afterward). */
+function testUpsertUpdate() {
+  upsertRow({
+    name: 'Upsert test',
+    email: 'upsert-test@example.com',
+    phone: '',
+    party: '',
+    attending: 'Joyfully accept',
+    events: 'Welcome Party / Mehndi (1)',
+    guestsWelcome: 1,
+    guestsHaldi: 0,
+    guestsWedding: 0,
+    guestsReception: 0,
+    diet: '',
+    allergies: '',
+    transport: '',
+    song: '',
+    notes: 'First submit',
+  });
+  upsertRow({
+    name: 'Upsert test EDITED',
+    email: 'upsert-test@example.com',
+    phone: '+356 000',
+    party: '',
+    attending: 'Joyfully accept',
+    events: 'Welcome Party / Mehndi (2)',
+    guestsWelcome: 2,
+    guestsHaldi: 0,
+    guestsWedding: 0,
+    guestsReception: 0,
+    diet: '',
+    allergies: '',
+    transport: '',
+    song: '',
+    notes: 'Second submit — should update same row',
+  });
 }
