@@ -1,5 +1,6 @@
-import type { CSSProperties } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 import type { WeddingEvent } from '../../data/wedding';
+import { invitePhotoReady, whenInvitePhotoReady } from '../../lib/invitePhotos';
 import { themeFor } from './InviteScenes';
 
 /** "18:00" → "6:00 PM" */
@@ -41,21 +42,43 @@ export function InviteCard({ event, active }: { event: WeddingEvent; active: boo
   const theme = themeFor(event.slug);
   const Scene = theme.scene;
   const photo = EVENT_BACKGROUNDS[event.slug];
+  // The gradient is only the drawn-scene fallback. Photo cards stay blank until
+  // the artwork has decoded, so the gradient never flashes in front of it.
+  const [photoReady, setPhotoReady] = useState(() => (photo ? invitePhotoReady(photo) : false));
+  const [photoFailed, setPhotoFailed] = useState(false);
+
+  useEffect(() => {
+    if (!photo) return;
+    let live = true;
+    whenInvitePhotoReady(photo).then((ok) => {
+      if (!live) return;
+      if (ok) setPhotoReady(true);
+      else setPhotoFailed(true);
+    });
+    return () => {
+      live = false;
+    };
+  }, [photo]);
+
+  const showPhoto = Boolean(photo) && photoReady && !photoFailed;
+  const waitingForPhoto = Boolean(photo) && !photoReady && !photoFailed;
 
   return (
     <article
       data-active={active}
-      className="inv-card relative aspect-[9/16] w-full overflow-hidden rounded-2xl"
-      style={{ background: theme.background, containerType: 'inline-size' } as CSSProperties}
+      className={`inv-card relative aspect-[9/16] w-full overflow-hidden rounded-2xl ${waitingForPhoto ? 'invisible' : ''}`}
+      style={{ background: showPhoto || waitingForPhoto ? 'transparent' : theme.background, containerType: 'inline-size' } as CSSProperties}
     >
       {/* Event photo backdrop; events without a photo fall back to the drawn scene. */}
-      {photo ? (
-        <div
-          className="pointer-events-none absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url("${photo}")` }}
-          aria-hidden="true"
+      {showPhoto ? (
+        <img
+          src={photo ?? ''}
+          alt=""
+          decoding="sync"
+          fetchPriority={active ? 'high' : 'low'}
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
         />
-      ) : (
+      ) : photo && !photoFailed ? null : (
         <svg viewBox="0 0 360 640" preserveAspectRatio="xMidYMax slice" className="inv-kenburns absolute inset-0 h-full w-full" aria-hidden="true">
           <Scene />
         </svg>

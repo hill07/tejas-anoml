@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppShell } from './components/Layout';
 import { Home } from './pages/Home';
@@ -24,6 +24,12 @@ function Loading() {
 }
 
 export function App() {
+  // The invite route is lazy. Fetch it while the cover is still up so opening
+  // it does not wait on a second download.
+  useEffect(() => {
+    void import('./pages/Schedule');
+  }, []);
+
   return (
     <BrowserRouter>
       <Suspense fallback={<Loading />}>

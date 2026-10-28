@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ChevronRightIcon } from '../components/Icons';
 import { InviteCard } from '../components/invite/InviteCard';
 import { events } from '../data/wedding';
+import { INVITE_PHOTOS, invitePhotoReady, whenInvitePhotoReady } from '../lib/invitePhotos';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 const AUTOPLAY_MS = 6000;
@@ -28,6 +29,7 @@ export default function Schedule() {
   const navigate = useNavigate();
   const n = events.length;
   const [active, setActive] = useState(0);
+  const [artReady, setArtReady] = useState(() => INVITE_PHOTOS.every((src) => invitePhotoReady(src)));
   const [drag, setDrag] = useState(0);
   const [hovering, setHovering] = useState(false);
   const [hidden, setHidden] = useState(document.visibilityState === 'hidden');
@@ -38,6 +40,18 @@ export default function Schedule() {
   const lastOffset = useRef<number[]>([]);
 
   const go = useCallback((delta: number) => setActive((a) => (((a + delta) % n) + n) % n), [n]);
+
+  // Hold the cards until the first artwork has decoded, so the gradient
+  // placeholder never appears in its place.
+  useEffect(() => {
+    let live = true;
+    Promise.all(INVITE_PHOTOS.map((src) => whenInvitePhotoReady(src))).then(() => {
+      if (live) setArtReady(true);
+    });
+    return () => {
+      live = false;
+    };
+  }, []);
 
   // Autoplay: advance every 6 s unless hovered, hidden, or reduced motion is preferred.
   useEffect(() => {
@@ -109,7 +123,8 @@ export default function Schedule() {
           setDrag(0);
         }}
       >
-        {events.map((event, i) => {
+        {artReady
+          ? events.map((event, i) => {
           const d = offsets[i];
           const isActive = d === 0;
           const visible = Math.abs(d) <= 1;
@@ -150,7 +165,8 @@ export default function Schedule() {
               </button>
             </div>
           );
-        })}
+        })
+          : null}
 
         {n > 1 ? (
           <>

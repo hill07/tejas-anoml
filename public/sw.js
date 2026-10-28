@@ -1,6 +1,17 @@
 // Service worker: makes the site installable and lets it open offline.
-const CACHE = 'at-wedding-v1';
-const CORE = ['/', '/manifest.webmanifest', '/favicon.png', '/icons/icon-192.png', '/icons/icon-512.png', '/icons/apple-touch-icon.png'];
+const CACHE = 'at-wedding-v2';
+const CORE = [
+  '/',
+  '/manifest.webmanifest',
+  '/favicon.png',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/icons/apple-touch-icon.png',
+  '/optimized/mehndi.webp',
+  '/optimized/haldi.webp',
+  '/optimized/wedding.webp',
+  '/optimized/reception.webp',
+];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE)).then(() => self.skipWaiting()));
@@ -42,7 +53,7 @@ self.addEventListener('fetch', (event) => {
       (hit) =>
         hit ||
         fetch(req).then((res) => {
-          if (res.ok && (url.pathname.startsWith('/assets/') || CORE.includes(url.pathname))) {
+          if (res.ok && (url.pathname.startsWith('/assets/') || url.pathname.startsWith('/optimized/') || CORE.includes(url.pathname))) {
             const copy = res.clone();
             caches.open(CACHE).then((c) => c.put(req, copy));
           }
