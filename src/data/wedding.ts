@@ -283,7 +283,7 @@ export const ceremonies = [
     title: 'Baraat',
     body: 'The procession. We arrive with family dancing ahead of us behind a dhol drum. There is no wrong way to join in — just dance.',
   },
-  { title: 'Milni', body: 'The two families formally meet at the entrance, greeting each other pair by pair with garlands.' },
+  { title: 'Pokhvanu', body: 'The two families formally meet at the entrance, greeting each other pair by pair with garlands.' },
   {
     title: 'Jai Mala / Varmala',
     body: "We exchange flower garlands. Expect friends to lift us up so the other can't reach. It is meant to be funny.",
@@ -383,12 +383,6 @@ export const gifts = {
   more: 'A full gift list will be added here soon.',
 };
 
-export const story = [
-  {
-    title: 'How we met',
-    body:
-      "It started on Snapchat — Anmol found Tejas in her quick add, sent a happy birthday message, and the replies never really stopped.",
-  },
-];
+export const story = [];
 
 export const galleryNote = `Photos will appear here after the celebrations. Share yours with ${couple.hashtag}.`;
