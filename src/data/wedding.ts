@@ -383,6 +383,11 @@ export const gifts = {
   more: 'A full gift list will be added here soon.',
 };
 
-export interface StorySection {\n  title: string;\n  body: string;\n}\n\nexport const story: StorySection[] = [];
+export interface StorySection {
+  title: string;
+  body: string;
+}
+
+export const story: StorySection[] = [];
 
 export const galleryNote = `Photos will appear here after the celebrations. Share yours with ${couple.hashtag}.`;
