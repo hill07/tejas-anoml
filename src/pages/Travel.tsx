@@ -36,17 +36,17 @@ export default function Travel() {
     'Travel & Stay in Malta',
     'Travel information and directions to wedding venues in Malta.',
   );
+  const resort = travel.resortName;
   const radissonVenue = {
-    venue: 'Radisson Blu Resort & Spa, Malta Golden Sands',
-    address: 'Radisson Blu Resort & Spa, Malta Golden Sands',
+    venue: resort,
+    detail: 'Your home base — every event below is within this resort.',
     mapUrl: 'https://share.google/cuwXvdo6XaaSmnVMY',
   };
-  // Radisson first (where guests are staying), then one entry per event venue in schedule order.
   const venues = [
     radissonVenue,
     ...Array.from(new Map(events.map((e) => [e.venue, e])).values()).map((e) => ({
       venue: e.venue,
-      address: e.address,
+      detail: `Within ${resort}`,
       mapUrl: GOOGLE_MAPS_DIRECTIONS,
     })),
   ];
@@ -166,6 +166,9 @@ export default function Travel() {
       </Section> */}
 
       <Section label="All venues">
+        <Reveal className="card">
+          <p className="text-lg leading-relaxed">{travel.venuesIntro}</p>
+        </Reveal>
         <div className="grid gap-3 sm:grid-cols-2">
           {venues.map((e) => (
             <a
@@ -177,7 +180,7 @@ export default function Travel() {
             >
               <span>
                 <span className="block font-heading text-base text-maroon-deep">{e.venue}</span>
-                <span className="block text-sm text-muted">{e.address}</span>
+                <span className="block text-sm text-muted">{e.detail}</span>
               </span>
               <ExternalIcon size={16} className="shrink-0 text-gold" />
             </a>

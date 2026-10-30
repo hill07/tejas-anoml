@@ -268,6 +268,9 @@ export const travel = {
     { time: '00:30 / 01:15 / 02:00', route: 'Villa Arrigo → all hotels', day: 'Thu 1 July' },
   ],
   pickup: 'All coaches leave from the main hotel entrances. Look for the marigold sign in the windscreen.',
+  venuesIntro:
+    'All our celebrations take place at Radisson Blu Resort & Spa, Malta Golden Sands — in different spaces around the resort, listed below.',
+  resortName: 'Radisson Blu Resort & Spa, Malta Golden Sands',
 };
 
 export const ceremonies = [
@@ -318,11 +321,7 @@ export const etiquette = [
 
 export const faq = [
   { q: 'What should I wear?', a: 'See the Wardrobe page — guidance and inspiration for every event, including Western alternatives.' },
-  { q: "Can I wear Indian clothes if I'm not Indian?", a: "Yes, and we'd love it. Ask us if you need help finding something." },
   { q: 'Are children invited?', a: "Yes, at every event there is a supervised kids' room at the wedding venue." },
-  { q: 'Will food be provided?', a: 'At every event. Everything is vegetarian, with clearly labelled vegan and nut-free options.' },
-  { q: 'Is alcohol being served?', a: 'Full bar at the Welcome Party, Sangeet and Reception. The daytime ceremonies are dry.' },
-  { q: 'Can I take photos during the ceremony?', a: "Yes, except during the pheras. We'll let you know when." },
   { q: 'Where should I park?', a: 'Free parking at every venue except Mdina, which is car-free — use the Main Gate car park.' },
   { q: 'What time should I arrive?', a: 'Every event card lists a recommended arrival time, usually 15–30 minutes before the start.' },
   {
@@ -373,10 +372,8 @@ export const updates = [
 
 export const gifts = {
   wording:
-    'Having everyone we love fly across oceans to be with us in Malta is already more than we could ask for — honestly, that is the gift. If you would still like to give something, a card with an enveloped present is warmly received.',
-  envelope:
-    'Enveloped presents — please bring your envelope on the wedding day. There will be a decorated card box at the Reception, and family will be collecting them at the Sangeet too.',
-  more: 'A full gift list will be added here soon.',
+    'Having everyone we love fly across oceans to be with us in Malta is already more than we could ask for — honestly, that is the gift.',
+  note: 'Kindly, no boxed gifts please.',
 };
 
 export interface StorySection {

@@ -4,7 +4,7 @@ import { faq } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 export default function Faq() {
-  useDocumentTitle('Guest FAQ', 'Children, alcohol, photos, parking and what to bring — answered.');
+  useDocumentTitle('Guest FAQ', 'Parking, what to bring, children and dress code — answered.');
   return (
     <Page>
       <PageHeader

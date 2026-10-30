@@ -1,5 +1,5 @@
 import { Page, PageHeader } from '../components/Layout';
-import { GoldCorners, SectionRule } from '../components/Ornaments';
+import { GoldCorners } from '../components/Ornaments';
 import { Reveal } from '../components/Reveal';
 import { couple, gifts } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
@@ -12,14 +12,8 @@ export default function Gifts() {
       <Reveal className="card px-6 py-8 text-center sm:px-10">
         <GoldCorners />
         <p className="text-xl leading-relaxed">{gifts.wording}</p>
+        <p className="mt-6 font-heading text-base uppercase tracking-[0.18em] text-maroon-deep">{gifts.note}</p>
       </Reveal>
-      <section className="mt-10">
-        <SectionRule label="Enveloped presents" />
-        <Reveal className="card mt-4">
-          <p className="text-lg leading-relaxed">{gifts.envelope}</p>
-        </Reveal>
-      </section>
-      <p className="card mt-4 text-base italic text-muted">{gifts.more}</p>
     </Page>
   );
 }
