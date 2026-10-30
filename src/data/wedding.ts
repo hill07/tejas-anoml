@@ -177,11 +177,7 @@ export const wardrobe: { slug: AttireSlug; event: string; guidance: string; deta
 export const wardrobeIntro =
   "Malta in late June is hot and bright — think light fabrics, and something for the evening breeze. If you don't own Indian clothing, the Western alternatives below are completely fine.";
 
-export const pleaseAvoid = [
-  'White or off-white on the ceremony day — it is worn for mourning in many Hindu families.',
-  'Black on the ceremony day. Save it for the reception, where it is very welcome.',
-  'Bridal red with heavy gold on the ceremony day.',
-];
+export const pleaseAvoid = 'White, black, or bridal red on the ceremony day.';
 
 export const whereToShop =
   "Green Street in Leicester, Southall Broadway in London and Belgrave Road in Birmingham all have plenty of options. Order at least six weeks ahead if anything needs altering — and ask us if you'd like help, we genuinely enjoy it.";

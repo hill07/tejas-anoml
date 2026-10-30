@@ -85,16 +85,7 @@ export default function Wardrobe() {
         <section className="pt-6">
           <SectionRule label="Please avoid" light />
           <Reveal className="card mt-4">
-            <ul className="space-y-3">
-              {pleaseAvoid.map((item) => (
-                <li key={item} className="flex gap-3 text-lg leading-relaxed">
-                  <span className="text-gold" aria-hidden="true">
-                    ❖
-                  </span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
+            <p className="text-lg leading-relaxed">{pleaseAvoid}</p>
           </Reveal>
         </section>
 
