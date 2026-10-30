@@ -18,6 +18,7 @@ const photos = [
   ['attire-haldi.jpg', 'attire-haldi', [480, 800]],
   ['attire-sangeet.jpg', 'attire-sangeet', [480, 800]],
   ['attire-reception.jpg', 'attire-reception', [480, 800]],
+  ['attire-ceremony.jpg', 'attire-ceremony', [480, 800]],
 ];
 
 for (const [file, name, widths] of photos) {

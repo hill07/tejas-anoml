@@ -12,13 +12,14 @@ import sangeet480 from '../assets/attire-sangeet-480.webp';
 import sangeet800 from '../assets/attire-sangeet-800.webp';
 import reception480 from '../assets/attire-reception-480.webp';
 import reception800 from '../assets/attire-reception-800.webp';
+import ceremony480 from '../assets/attire-ceremony-480.webp';
+import ceremony800 from '../assets/attire-ceremony-800.webp';
 
-// Same image pairing as the content reference (the ceremony shares the Mehndi inspiration).
 const images: Record<AttireSlug, [string, string]> = {
   mehndi: [mehndi480, mehndi800],
   haldi: [haldi480, haldi800],
   sangeet: [sangeet480, sangeet800],
-  ceremony: [mehndi480, mehndi800],
+  ceremony: [ceremony480, ceremony800],
   reception: [reception480, reception800],
 };
 
