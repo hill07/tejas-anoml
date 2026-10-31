@@ -134,22 +134,16 @@ export const invitedLabels: Record<Invited, string> = {
 export const mapsUrl = (query: string) =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 
-export type AttireSlug = 'mehndi' | 'haldi' | 'sangeet' | 'ceremony' | 'reception';
+export type AttireSlug = 'welcome-party' | 'haldi' | 'ceremony' | 'reception';
 
 export const wardrobe: { slug: AttireSlug; event: string; guidance: string; detail: string; western: string }[] = [
   {
-    slug: 'mehndi',
-    event: 'Mehndi',
+    slug: 'welcome-party',
+    event: 'Welcome Party / Mehndi',
     guidance: 'Colourful Indian or festive attire',
-    detail: 'Lehengas, anarkalis, kurtas, or a bright summer dress. Henna is messy, so avoid long fitted sleeves.',
+    detail:
+      'Lehengas, anarkalis, kurtas, or a bright summer dress. Henna is messy, so avoid long fitted sleeves — keep it relaxed and colourful for the welcome evening.',
     western: 'A bright midi dress, or a linen shirt with chinos.',
-  },
-  {
-    slug: 'sangeet',
-    event: 'Sangeet',
-    guidance: 'Glamorous Indian evening wear',
-    detail: 'Embellished sarees, sequinned lehengas, velvet sherwanis, bandhgalas. This is the night to go all out.',
-    western: 'Cocktail dress or a dark suit.',
   },
   {
     slug: 'haldi',

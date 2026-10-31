@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { ComponentType, SVGProps } from 'react';
-import { BellIcon, ChevronRightIcon, GiftIcon, HeartIcon, ImagesIcon, PhoneIcon, QuestionIcon } from '../components/Icons';
+import { ChevronRightIcon, GiftIcon, HeartIcon, ImagesIcon, PhoneIcon, QuestionIcon } from '../components/Icons';
 import { Page, PageHeader } from '../components/Layout';
 import { Reveal } from '../components/Reveal';
 import { couple } from '../data/wedding';
@@ -8,7 +8,6 @@ import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 type Icon = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
 const links: { to: string; label: string; note: string; Icon: Icon }[] = [
-  { to: '/updates', label: 'Live Updates', note: 'Changes, reminders, coach times', Icon: BellIcon },
   { to: '/faq', label: 'Guest FAQ', note: 'The questions everyone asks', Icon: QuestionIcon },
   { to: '/gallery', label: 'Photos & Memories', note: 'Share what you capture', Icon: ImagesIcon },
   { to: '/contacts', label: 'Important Contacts', note: 'Who to call, and when', Icon: PhoneIcon },
@@ -17,7 +16,7 @@ const links: { to: string; label: string; note: string; Icon: Icon }[] = [
 ];
 
 export default function More() {
-  useDocumentTitle('More', 'Live updates, guest FAQ, photo gallery, important contacts, gifts and our story.');
+  useDocumentTitle('More', 'Guest FAQ, photo gallery, important contacts, gifts and our story.');
   return (
     <Page>
       <PageHeader eyebrow="Everything else" title="More" />

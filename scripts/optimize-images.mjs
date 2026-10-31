@@ -15,6 +15,7 @@ const photos = [
   ['malta-mdina.jpg', 'malta-mdina', [640, 1280]],
   ['mandap.jpg', 'mandap', [640, 1280]],
   ['attire-mehndi.jpg', 'attire-mehndi', [480, 800]],
+  ['attire-welcome-party.jpg', 'attire-welcome-party', [480, 800]],
   ['attire-haldi.jpg', 'attire-haldi', [480, 800]],
   ['attire-sangeet.jpg', 'attire-sangeet', [480, 800]],
   ['attire-reception.jpg', 'attire-reception', [480, 800]],

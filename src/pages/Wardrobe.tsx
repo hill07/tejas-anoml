@@ -4,21 +4,18 @@ import { SectionRule } from '../components/Ornaments';
 import { Reveal } from '../components/Reveal';
 import { pleaseAvoid, wardrobe, wardrobeIntro, type AttireSlug } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
-import mehndi480 from '../assets/attire-mehndi-480.webp';
-import mehndi800 from '../assets/attire-mehndi-800.webp';
+import welcome480 from '../assets/attire-welcome-party-480.webp';
+import welcome800 from '../assets/attire-welcome-party-800.webp';
 import haldi480 from '../assets/attire-haldi-480.webp';
 import haldi800 from '../assets/attire-haldi-800.webp';
-import sangeet480 from '../assets/attire-sangeet-480.webp';
-import sangeet800 from '../assets/attire-sangeet-800.webp';
 import reception480 from '../assets/attire-reception-480.webp';
 import reception800 from '../assets/attire-reception-800.webp';
 import ceremony480 from '../assets/attire-ceremony-480.webp';
 import ceremony800 from '../assets/attire-ceremony-800.webp';
 
 const images: Record<AttireSlug, [string, string]> = {
-  mehndi: [mehndi480, mehndi800],
+  'welcome-party': [welcome480, welcome800],
   haldi: [haldi480, haldi800],
-  sangeet: [sangeet480, sangeet800],
   ceremony: [ceremony480, ceremony800],
   reception: [reception480, reception800],
 };

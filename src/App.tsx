@@ -12,7 +12,6 @@ const Gallery = lazy(() => import('./pages/Gallery'));
 const Rsvp = lazy(() => import('./pages/Rsvp'));
 const More = lazy(() => import('./pages/More'));
 const ThingsToDo = lazy(() => import('./pages/ThingsToDo'));
-const Updates = lazy(() => import('./pages/Updates'));
 const Faq = lazy(() => import('./pages/Faq'));
 const Contacts = lazy(() => import('./pages/Contacts'));
 const Gifts = lazy(() => import('./pages/Gifts'));
@@ -45,7 +44,6 @@ export function App() {
             <Route path="rsvp" element={<Rsvp />} />
             <Route path="more" element={<More />} />
             <Route path="things-to-do" element={<ThingsToDo />} />
-            <Route path="updates" element={<Updates />} />
             <Route path="faq" element={<Faq />} />
             <Route path="contacts" element={<Contacts />} />
             <Route path="gifts" element={<Gifts />} />
