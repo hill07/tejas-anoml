@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Page } from '../components/Layout';
 import { GoldCorners, OrnamentDivider } from '../components/Ornaments';
 import { ArrowLeftIcon, MapPinIcon } from '../components/Icons';
-import { events, invitedLabels } from '../data/wedding';
+import { attireForEvent, events } from '../data/wedding';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 import NotFound from './NotFound';
 
@@ -21,6 +21,7 @@ export default function EventDetail() {
   const { slug } = useParams();
   const index = events.findIndex((e) => e.slug === slug);
   const event = events[index];
+  const attire = event ? attireForEvent(event.slug) : undefined;
   useDocumentTitle(
     event ? event.name : 'Event not found',
     event ? `${event.dateLabel}, ${event.startTime} at ${event.venue}. ${event.dressCode}.` : undefined,
@@ -45,14 +46,24 @@ export default function EventDetail() {
         <GoldCorners />
         <dl className="grid grid-cols-2 gap-x-5 gap-y-5">
           <Fact label="Starts" value={event.startTime} />
-          <Fact label="Arrive by" value={event.arrivalTime} />
           <Fact label="Expected finish" value={event.finishTime} />
-          <Fact label="Setting" value={event.setting} />
-          <Fact label="Dress code" value={event.dressCode} />
-          <Fact label="Colours" value={event.colours} />
-          <Fact label="Who's invited" value={invitedLabels[event.invited]} />
-          <Fact label="Food" value={event.food} />
         </dl>
+        <div className="mt-6 border-t border-[hsl(var(--gold)/0.3)] pt-5">
+          <p className="eyebrow text-[10px]">Attire</p>
+          <p className="mt-1 text-lg font-semibold leading-snug text-maroon-deep">{event.dressCode}</p>
+          {attire ? (
+            <>
+              <p className="mt-2 text-lg leading-relaxed text-ink">{attire.guidance}</p>
+              <p className="mt-2 text-base leading-relaxed text-muted">{attire.detail}</p>
+              <Link
+                to={`/wardrobe#attire-${attire.slug}`}
+                className="link-gold mt-3 inline-block font-heading text-sm uppercase tracking-[0.14em]"
+              >
+                See outfit inspiration
+              </Link>
+            </>
+          ) : null}
+        </div>
       </section>
 
       <section className="card mt-4">

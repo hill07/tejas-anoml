@@ -168,6 +168,18 @@ export const wardrobe: { slug: AttireSlug; event: string; guidance: string; deta
   },
 ];
 
+const eventAttireSlug: Record<string, AttireSlug> = {
+  'welcome-party': 'welcome-party',
+  haldi: 'haldi',
+  wedding: 'ceremony',
+  reception: 'reception',
+};
+
+export function attireForEvent(eventSlug: string) {
+  const slug = eventAttireSlug[eventSlug];
+  return slug ? wardrobe.find((w) => w.slug === slug) : undefined;
+}
+
 export const wardrobeIntro =
   "Malta in late June is hot and bright — think light fabrics, and something for the evening breeze. If you don't own Indian clothing, the Western alternatives below are completely fine.";
 

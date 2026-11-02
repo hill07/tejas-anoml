@@ -10,8 +10,8 @@ import haldi480 from '../assets/attire-haldi-480.webp';
 import haldi800 from '../assets/attire-haldi-800.webp';
 import reception480 from '../assets/attire-reception-480.webp';
 import reception800 from '../assets/attire-reception-800.webp';
-import ceremony480 from '../assets/attire-ceremony-480.webp';
-import ceremony800 from '../assets/attire-ceremony-800.webp';
+import ceremony480 from '../assets/wedding-480.jpeg';
+import ceremony800 from '../assets/wedding-800.jpeg';
 
 const images: Record<AttireSlug, [string, string]> = {
   'welcome-party': [welcome480, welcome800],
