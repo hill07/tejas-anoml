@@ -1,7 +1,7 @@
 import { GoldFrame } from '../components/GoldFrame';
-import { Page } from '../components/Layout';
+import { Page, PageHeader } from '../components/Layout';
 import { Reveal } from '../components/Reveal';
-import { wardrobe, type AttireSlug } from '../data/wedding';
+import { wardrobe, wardrobeIntro, type AttireSlug } from '../data/wedding';
 import welcome480 from '../assets/attire-welcome-party-480.webp';
 import welcome800 from '../assets/attire-welcome-party-800.webp';
 import haldi480 from '../assets/attire-haldi-480.webp';
@@ -23,6 +23,8 @@ const jump = (slug: string) => document.getElementById(`attire-${slug}`)?.scroll
 export default function Wardrobe() {
   return (
     <Page bg="crimson" wide>
+      <PageHeader light eyebrow="Wardrobe planner" title="What to Wear" intro={wardrobeIntro} />
+
       <ul className="grid grid-cols-2 justify-items-center gap-x-5 gap-y-10 sm:gap-x-10 md:grid-cols-3">
         {wardrobe.map((w, i) => (
           <li key={w.slug} className={i === wardrobe.length - 1 && wardrobe.length % 2 === 1 ? 'col-span-2 md:col-span-1' : ''}>
@@ -41,6 +43,12 @@ export default function Wardrobe() {
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </GoldFrame>
+                <span
+                  className="mt-5 max-w-[11rem] font-heading text-lg uppercase leading-snug tracking-[0.16em] text-ivory"
+                  style={{ textShadow: '0 2px 8px hsl(345 70% 10% / .6)' }}
+                >
+                  {w.event}
+                </span>
               </button>
             </Reveal>
           </li>
