@@ -181,8 +181,7 @@ export function attireForEvent(eventSlug: string) {
 }
 
 export const wardrobeIntro =
-  "Please Be attired in the Shades given below for the specific functions.Please avoid white, black or bridal red on the wedding day.";
-
+"Malta in late June is hot and bright — think light fabrics, and something for the evening breeze.Please Be attired in the Shades given below for the specific functions.Please avoid white, black or bridal red on the wedding day.";
 export const pleaseAvoid = 'White, black, or bridal red on the ceremony day.';
 
 export const whereToShop =
