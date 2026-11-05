@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { ComponentType, SVGProps } from 'react';
-import { ChevronRightIcon, GiftIcon, HeartIcon, ImagesIcon, PhoneIcon, QuestionIcon } from '../components/Icons';
+import { ChevronRightIcon, GiftIcon, ImagesIcon, PhoneIcon, QuestionIcon } from '../components/Icons';
 import { Page, PageHeader } from '../components/Layout';
 import { Reveal } from '../components/Reveal';
 import { couple } from '../data/wedding';
@@ -12,7 +12,6 @@ const links: { to: string; label: string; note: string; Icon: Icon }[] = [
   { to: '/gallery', label: 'Photos & Memories', note: 'Share what you capture', Icon: ImagesIcon },
   { to: '/contacts', label: 'Important Contacts', note: 'Who to call, and when', Icon: PhoneIcon },
   { to: '/gifts', label: 'Gifts', note: 'Only if you insist', Icon: GiftIcon },
-  { to: '/story', label: 'Meet Us', note: 'How we got here', Icon: HeartIcon },
 ];
 
 export default function More() {

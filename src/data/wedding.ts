@@ -14,7 +14,7 @@ export const couple = {
   tagline: 'Two hearts, one love, and a lifetime of togetherness.',
   welcome:
     'With the blessings of our families, we warmly invite you to celebrate the wedding festivities of Anmol and Tejas. We look forward to sharing these special moments with you.',
-  families: 'Anmol, daughter of Mr Prashant & Karuna Brahmbhatt, and Tejas, son of Mr HEMANG Bhatt & Late Mrs Neela Bhatt',
+  families: 'Anmol, daughter of Mr Prashant & Karuna Brahmbhatt, and Tejas, son of Mr Hemang Bhatt & Late Mrs Neela Bhatt',
 };
 
 export const SITE_TITLE_DATE = '30 June 2027, Malta';
@@ -181,7 +181,7 @@ export function attireForEvent(eventSlug: string) {
 }
 
 export const wardrobeIntro =
-  "Malta in late June is hot and bright — think light fabrics, and something for the evening breeze. If you don't own Indian clothing, the Western alternatives below are completely fine.";
+  "Please Be attired in the Shades given below for the specific functions.Please avoid white, black or bridal red on the wedding day.";
 
 export const pleaseAvoid = 'White, black, or bridal red on the ceremony day.';
 
